@@ -175,3 +175,5 @@ add_executable(
         "exercises/chapter 17/exercise 07.c"
         "exercises/chapter 17/exercise 08.c"
 )
+
+target_link_libraries(C_Primer_Plus m)
