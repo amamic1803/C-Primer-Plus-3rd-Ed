@@ -5,7 +5,7 @@
 #define MAX_STR_NUM 10
 static int load_strings(char **strings, int n);
 static void print_strings(char **strings, int entered);
-static void gets(char *str, int size);
+static void gets_custom(char *str, int size);
 static int get_first_word_len(char *string);
 static void sort_by_ascii(char **strings, int entered);
 static void sort_by_length(char **strings, int entered);
@@ -98,7 +98,7 @@ static int load_strings(char **strings, int n_strings) {
     int i;
     puts("Enter strings (EOF to stop):");
     for (i = 0; i < n_strings; i++) {
-        gets(strings[i], MAX_STR_LEN + 1);
+        gets_custom(strings[i], MAX_STR_LEN + 1);
         if (strchr(strings[i], EOF) != NULL) {
             i++;
             break;
@@ -114,7 +114,7 @@ static void print_strings(char **strings, int entered) {
     }
 }
 
-static void gets(char *str, int size) {
+static void gets_custom(char *str, int size) {
     int i = 0;
     char ch;
     while ((ch = (char) getchar()) != '\n' && i < size - 1) {

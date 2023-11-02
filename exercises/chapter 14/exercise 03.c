@@ -8,7 +8,7 @@ struct book {
     char author[MAXAUTL];
     float value;
 };
-static char * gets(char *s, int max_len);
+static char * gets_custom(char *s, int max_len);
 static void sort_by_title(struct book **libry_ptrs, int count);
 
 
@@ -21,9 +21,9 @@ void ch14_ex03(void) {
 
     printf("Please enter the book title.\n");
     printf("Press [enter] at the start of a line to stop.\n");
-    while (count < MAXBKS && gets(libry[count].title, MAXTITL) != NULL && libry[count].title[0] != '\0') {
+    while (count < MAXBKS && gets_custom(libry[count].title, MAXTITL) != NULL && libry[count].title[0] != '\0') {
         printf("Now enter the author.\n");
-        gets(libry[count].author, MAXAUTL);
+        gets_custom(libry[count].author, MAXAUTL);
         printf("Now enter the value.\n");
         scanf("%f", &libry[count++].value);
         while (getchar() != '\n');
@@ -45,7 +45,7 @@ void ch14_ex03(void) {
     printf("\nThe total value of your books is $%.2f.\n", total);
 }
 
-static char * gets(char *s, int max_len) {
+static char * gets_custom(char *s, int max_len) {
     char c;
     char *initial = s;
     int i = 0;

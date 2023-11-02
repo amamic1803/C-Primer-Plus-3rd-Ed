@@ -10,7 +10,7 @@ struct book {
     char author[MAXAUTL];
     float value;
 };
-static char * gets(char *s, int max_len);
+static char * gets_custom(char *s, int max_len);
 
 
 void ch14_ex07(void) {
@@ -44,9 +44,9 @@ void ch14_ex07(void) {
                             case 'y':
                                 while (getchar() != '\n');
                                 printf("Enter the new title.\n");
-                                gets(libry[count - 1].title, MAX_LINE);
+                                gets_custom(libry[count - 1].title, MAX_LINE);
                                 printf("Enter the new author.\n");
-                                gets(libry[count - 1].author, MAX_LINE);
+                                gets_custom(libry[count - 1].author, MAX_LINE);
                                 printf("Enter the new value.\n");
                                 scanf("%f", &libry[count - 1].value);
                                 while (getchar() != '\n');
@@ -83,9 +83,9 @@ void ch14_ex07(void) {
     }
     puts("Please add new book titles.");
     puts("Press [enter] at the start of a line to stop.");
-    while (count < MAXBKS && gets(libry[count].title, MAX_LINE) != NULL && libry[count].title[0] != '\0') {
+    while (count < MAXBKS && gets_custom(libry[count].title, MAX_LINE) != NULL && libry[count].title[0] != '\0') {
         puts("Now enter the author.");
-        gets(libry[count].author, MAX_LINE);
+        gets_custom(libry[count].author, MAX_LINE);
         puts("Now enter the value.");
         scanf("%f", &libry[count++].value);
         while (getchar() != '\n');
@@ -103,7 +103,7 @@ void ch14_ex07(void) {
     }
 }
 
-static char * gets(char *s, int max_len) {
+static char * gets_custom(char *s, int max_len) {
     char c;
     char *initial = s;
     int i = 0;
