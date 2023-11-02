@@ -1,5 +1,5 @@
-#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 static double power(double a, int b);
 
 
