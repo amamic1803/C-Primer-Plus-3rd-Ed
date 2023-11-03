@@ -11,7 +11,6 @@ void ch10_ex09(void) {
         {1.2, 2.3, 3.4, 4.5, 5.6},
         {9.8, 8.7, 7.6, 6.5, 5.4}
     };
-    int i, j;
     printf("Original array:\n");
     display_array(array, ROWS);
     mul2_array(array, ROWS);

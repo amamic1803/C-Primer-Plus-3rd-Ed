@@ -1,11 +1,11 @@
 #include <stdio.h>
 #define ARRAY_SIZE 5
 static void copy1(const int source[], int target[], int size);
-static void copy2(const int *source, int *target, int size);
+static void copy2(int *source, int *target, int size);
 
 
 void ch10_ex02(void) {
-    const int array1[ARRAY_SIZE] = {1, 2, 3, 4, 5};
+    int array1[ARRAY_SIZE] = {1, 2, 3, 4, 5};
     int array2[ARRAY_SIZE];
     int array3[ARRAY_SIZE];
     int i;
@@ -39,7 +39,7 @@ static void copy1(const int source[], int target[], int size) {
     }
 }
 
-static void copy2(const int *source, int *target, int size) {
+static void copy2(int *source, int *target, int size) {
     int *limit = source + size;
 
     while (source < limit) {

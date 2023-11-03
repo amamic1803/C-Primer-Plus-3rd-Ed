@@ -14,7 +14,6 @@ void ch16_ex05(void) {
     int cumulative_size = 0;
     int max;
     int number = 0;
-    int i;
     int entered = 0;
 
     puts("What is the maximum number of string entries?");
@@ -45,7 +44,7 @@ void ch16_ex05(void) {
 
         *(ptd + cumulative_size - str_size - 1) = str_size;
 
-        if (fread(ptd + cumulative_size - str_size, sizeof(char), str_size, fp) != str_size) {
+        if (fread(ptd + cumulative_size - str_size, sizeof(char), str_size, fp) != (size_t) str_size) {
             fprintf(stderr, "Error reading file.\n");
             free(ptd);
             exit(EXIT_FAILURE);
