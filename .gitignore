@@ -1,8 +1,0 @@
-# Build directories
-build/
-target/
-cmake-build-debug/
-cmake-build-release/
-
-# macOS
-.DS_Store
