@@ -20,7 +20,7 @@ void ch15_ex02(int argc, char *argv[]) {
     }
 
     if (strlen(argv[1]) > (sizeof(int) * 8) || strlen(argv[2]) > (sizeof(unsigned short int) * 8)) {
-        printf("Both arguments must be %llu bits long or less.\n", (sizeof(unsigned short int) * 8));
+        printf("Both arguments must be %llu bits long or less.\n", (unsigned long long int) (sizeof(unsigned short int) * 8));
         exit(EXIT_FAILURE);
     }
 
