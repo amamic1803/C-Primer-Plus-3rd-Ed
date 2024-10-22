@@ -24,7 +24,7 @@ void ch17_ex02(void) {
             break;
         }
         if (FullList(movies)) {
-            fprintf(stderr, "The list is now full.\n");
+            fprintf(stderr, "The list is now full.\nIt contains %d movies.\n", ListItems(movies));
             break;
         }
         puts("Enter next movie title (empty line to stop):");
@@ -71,7 +71,7 @@ static BOOLEAN EmptyList(List l) {
     return l.head == NULL;
 }
 
-static BOOLEAN FullList(List l) {
+static BOOLEAN FullList(List) {
     Node * pt;
     BOOLEAN full;
 

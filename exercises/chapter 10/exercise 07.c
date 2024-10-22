@@ -23,7 +23,7 @@ void ch10_ex07(void) {
 }
 
 static void copy(const int *source, int *target, int size) {
-    int *limit = source + size;
+    int *limit = (int*) source + size;
 
     while (source < limit) {
         *target = *source;

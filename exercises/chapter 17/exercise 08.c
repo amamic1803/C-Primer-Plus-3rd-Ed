@@ -15,10 +15,7 @@ static char * s_gets(char * st, int max) {
 
     st[i] = '\0';
 
-    if (ch != EOF)
-        return st;
-    else
-        return NULL;
+    return ch != EOF ? st : NULL;
 }
 
 
@@ -156,7 +153,7 @@ static Node_t **TreeContains(Item_t item, const Tree *tree) {
     Node_t **node;
     int cmp;
 
-    for (node = &tree->root; *node != NULL; ) {
+    for (node = (Node_t**) &tree->root; *node != NULL; ) {
         cmp = strcmp(item, (*node)->item);
         if (cmp < 0)
             node = &(*node)->left;
@@ -228,7 +225,7 @@ static int TreeDelete(Item_t item_t, Item_l item_l, Tree *tree) {
         return FALSE;
 
     if (ListDelete(item_l, &node->kinds)) {
-        if (node->kinds.size > 0) {
+        if (ListSize(&node->kinds) > 0) {
             tree->size--;
             return TRUE;
         }
@@ -269,9 +266,7 @@ static void TraverseTree(const Tree *tree, void (*pfun)(Item_t item_t, Item_l it
 
     if ((node = tree->root) == NULL)
         return;
-    else {
-        TraverseTreeInternal(node, pfun);
-    }
+    TraverseTreeInternal(node, pfun);
 }
 static void TraverseTreeInternal(Node_t *node, void (*pfun)(Item_t item_t, Item_l item, int count)) {
     if (node->left != NULL)
@@ -312,7 +307,7 @@ void ch17_ex08(void) {
                 putchar('\n');
                 break;
             case 'n':
-                printf("%d pets in club.\n", pets.size);
+                printf("%d pets in club.\n", TreeSize(&pets));
                 putchar('\n');
                 break;
             case 'd':

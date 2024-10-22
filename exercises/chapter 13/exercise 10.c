@@ -5,7 +5,7 @@ static int get_num(long long int *num);
 
 
 void ch13_ex10(void) {
-    long long int num;
+    long long int num = 0;
 
     printf("Enter input: ");
     fflush(stdout);
@@ -59,8 +59,5 @@ static int get_num(long long int *num) {
 
     if (eof_found)
         return EOF;
-    else if (error_found)
-        return 0;
-    else
-        return 1;
+    return error_found ? 0 : 1;
 }

@@ -35,7 +35,7 @@ void ch13_ex11(void) {
     sort(names_ptrs, NAMES);
 
     for (i = 0; i < NAMES; i++)
-        printf("%-30s|%6.2Lf\n", names_ptrs[i], extract_average(names_ptrs[i]));
+        printf("%-30s|%6.2lf\n", names_ptrs[i], (double) extract_average(names_ptrs[i]));
 
     if (fclose(fp) != 0) {
         fprintf(stderr, "Error closing file\n");

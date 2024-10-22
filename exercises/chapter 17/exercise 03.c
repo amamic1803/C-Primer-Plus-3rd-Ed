@@ -72,6 +72,7 @@ static BOOLEAN FullList(const List *plist) {
     return plist->items == MAXSIZE;
 }
 
+[[maybe_unused]]
 static unsigned int ListItems(const List *plist) {
     return plist->items;
 }

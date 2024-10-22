@@ -18,10 +18,10 @@ static void print_class_average(struct student *student, int count);
 
 void ch14_ex05(void) {
     struct student students[CSIZE] = {
-        {{"John", "Doe"}},
-        {{"Jane", "Doe"}},
-        {{"Jack", "Doe"}},
-        {{"Jill", "Doe"}}
+        {{"John", "Doe"}, {0, 0, 0}, 0},
+        {{"Jane", "Doe"}, {0, 0, 0}, 0},
+        {{"Jack", "Doe"}, {0, 0, 0}, 0},
+        {{"Jill", "Doe"}, {0, 0, 0}, 0}
     };
     get_student_data(students, CSIZE);
     calculate_average(students, CSIZE);

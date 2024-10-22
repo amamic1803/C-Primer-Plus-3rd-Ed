@@ -5,7 +5,7 @@ static int get_num(unsigned long long int *num);
 
 
 void ch13_ex09(void) {
-    unsigned long long int num;
+    unsigned long long int num = 0;
 
     printf("Enter input: ");
     fflush(stdout);
