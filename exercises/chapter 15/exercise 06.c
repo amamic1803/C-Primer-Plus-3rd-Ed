@@ -84,31 +84,31 @@ static void set_property(unsigned int *box, unsigned int property, unsigned int 
 
     switch (property) {
         case 0: {
-            *box &= ~0b1U;
+            *box &= ~1U;
             *box |= value;
             break;
         }
         case 1: {
             value <<= 1U;
-            *box &= ~0b1110U;
+            *box &= ~0x0eU;
             *box |= value;
             break;
         }
         case 2: {
             value <<= 4U;
-            *box &= ~0b10000U;
+            *box &= ~0x10U;
             *box |= value;
             break;
         }
         case 3: {
             value <<= 5U;
-            *box &= ~0b11100000U;
+            *box &= ~0xe0U;
             *box |= value;
             break;
         }
         case 4: {
             value <<= 8U;
-            *box &= ~0b1100000000U;
+            *box &= ~0x300U;
             *box |= value;
             break;
         }
@@ -136,23 +136,23 @@ static unsigned int get_property(const unsigned int *box, unsigned int property)
 
     switch (property) {
         case 0: {
-            result = *box & 0b1U;
+            result = *box & 1U;
             break;
         }
         case 1: {
-            result = (*box & 0b1110U) >> 1U;
+            result = (*box & 0xeU) >> 1U;
             break;
         }
         case 2: {
-            result = (*box & 0b10000U) >> 4U;
+            result = (*box & 0x10U) >> 4U;
             break;
         }
         case 3: {
-            result = (*box & 0b11100000U) >> 5U;
+            result = (*box & 0xE0U) >> 5U;
             break;
         }
         case 4: {
-            result = (*box & 0b1100000000U) >> 8U;
+            result = (*box & 0x300U) >> 8U;
             break;
         }
         default: {

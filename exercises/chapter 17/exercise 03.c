@@ -10,6 +10,8 @@ void ch17_ex03(void) {
     Item temp;
 
     InitializeList(&movies);
+    (void) ListItems(&movies);  // to avoid unused function warning
+
     if (FullList(&movies)) {
         fprintf(stderr, "No memory available! Bye!\n");
         exit(EXIT_FAILURE);
@@ -74,7 +76,6 @@ static BOOLEAN FullList(const List *plist) {
     return plist->items == MAXSIZE;
 }
 
-[[maybe_unused]]
 static unsigned int ListItems(const List *plist) {
     return plist->items;
 }

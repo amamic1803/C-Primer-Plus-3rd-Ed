@@ -81,8 +81,9 @@ static BOOLEAN EmptyList(List l) {
     return l.head == NULL;
 }
 
-// NOLINTNEXTLINE(misc-unused-parameters)
 static BOOLEAN FullList(List l) {
+    (void) l;  // unused parameter
+
     Node * pt;
     BOOLEAN full;
 
