@@ -32,5 +32,5 @@ set_target_properties(C_Primer_Plus PROPERTIES
         OUTPUT_NAME C_Primer_Plus
 )
 target_compile_options(C_Primer_Plus PRIVATE
-        $<$<C_COMPILER_ID:GNU,Clang>:-Wall -Wextra -Wpedantic -Werror>
+        $<$<C_COMPILER_ID:GNU,Clang>:-Wall -Wextra -Wpedantic -Werror -Wno-unused-result>
 )
