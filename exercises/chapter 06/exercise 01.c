@@ -5,7 +5,7 @@ void ch06_ex01(void) {
     char letters[26];
 
     for (int i = 0; i < 26; i++) {
-        letters[i] = 'a' + i;
+        letters[i] = (char) ('a' + i);
     }
 
     printf("Letters: ");

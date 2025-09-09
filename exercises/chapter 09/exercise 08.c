@@ -13,9 +13,10 @@ void ch09_ex08(void) {
 static double power(double a, int b) {
     if (a == 0.0) {
         return a;
-    } else if (b == 0) {
-        return 1;
-    } else {
-        return b > 0 ? a * power(a, b - 1) : (1 / a) * power(a, b + 1);
     }
+    if (b == 0) {
+        return 1;
+    }
+
+    return b > 0 ? a * power(a, b - 1) : (1 / a) * power(a, b + 1);
 }

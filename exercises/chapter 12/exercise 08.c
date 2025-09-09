@@ -13,8 +13,9 @@ void ch12_ex08(void) {
     fflush(stdout);
     fgets(filename, MAX_FILENAME, stdin);
     i = (int) strlen(filename) - 1;
-    if (filename[i] == '\n')
+    if (filename[i] == '\n') {
         filename[i] = '\0';
+    }
 
     if ((fp = fopen(filename, "r")) == NULL) {
         fprintf(stderr, "Can't open %s\n", filename);
@@ -25,8 +26,9 @@ void ch12_ex08(void) {
     fflush(stdout);
     while (scanf("%d", &i) == 1) {
         fseek(fp, i, SEEK_SET);
-        while ((i = getc(fp)) != EOF && i != '\n')
+        while ((i = getc(fp)) != EOF && i != '\n') {
             putchar(i);
+        }
         putchar('\n');
         printf("Enter the location in the file (non-numeric to quit): ");
         fflush(stdout);

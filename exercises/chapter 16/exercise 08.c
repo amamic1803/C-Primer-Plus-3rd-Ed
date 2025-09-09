@@ -33,8 +33,9 @@ void ch16_ex08(void) {
 
 static void showarray(const struct names *ar, int n) {
     int i;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < n; i++) {
         printf("%s %s\n", ar[i].first, ar[i].last);
+    }
 }
 
 static int mycomp(const void *p1, const void *p2) {
@@ -43,8 +44,8 @@ static int mycomp(const void *p1, const void *p2) {
     int res;
 
     res = strcmp(a1->last, a2->last);
-    if (res != 0)
+    if (res != 0) {
         return res;
-    else
-        return strcmp(a1->first, a2->first);
+    }
+    return strcmp(a1->first, a2->first);
 }

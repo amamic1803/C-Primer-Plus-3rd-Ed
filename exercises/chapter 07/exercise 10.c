@@ -24,7 +24,7 @@ void ch07_ex10(void) {
                "5) quit\n"
                "*******************************\n");
         input = (char) getchar();
-        while ((char) getchar() != '\n');
+        while ((char) getchar() != '\n') {}
         switch(input) {
             case '1' : {
                 limit = LIMIT1;
@@ -53,7 +53,7 @@ void ch07_ex10(void) {
 
         printf("Enter taxable income:\n$");
         scanf("%lf", &income);
-        while ((char) getchar() != '\n');
+        while ((char) getchar() != '\n') {}
 
 
         if (income > limit) {

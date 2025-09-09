@@ -17,7 +17,7 @@ void ch15_ex01(void) {
 }
 
 static int str_to_int(const char *str) {
-    int result = 0;
+    unsigned int result = 0;
 
     if (strlen(str) > (sizeof(int) * 8)) {
         printf("The string is too long.\n");
@@ -29,10 +29,10 @@ static int str_to_int(const char *str) {
             fprintf(stderr, "The string is not a binary number.\n");
             exit(EXIT_FAILURE);
         }
-        result <<= 1;
-        result |= *str - '0';
+        result <<= 1U;
+        result |= (unsigned int) (*str - '0');
         str++;
     }
 
-    return result;
+    return (int) result;
 }

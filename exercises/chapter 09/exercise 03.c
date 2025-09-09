@@ -4,7 +4,8 @@ static void func(char ch, int a, int b);
 
 void ch09_ex03(void) {
     char ch;
-    int a, b;
+    int a;
+    int b;
     printf("Enter a character:\n");
     scanf("%c", &ch);
     printf("Enter columns:\n");
@@ -16,7 +17,8 @@ void ch09_ex03(void) {
 }
 
 static void func(char ch, int a, int b) {
-    int i, j;
+    int i;
+    int j;
 
     for (i = 0; i < b; i++) {
         for (j = 0; j < a; j++) {

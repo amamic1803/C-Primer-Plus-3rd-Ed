@@ -24,11 +24,12 @@ void ch11_ex07(void) {
 }
 
 static char * string_in(char * str1, char * str2) {
-    char *ptr1, *ptr2;
+    char *ptr1;
+    char *ptr2;
     int i;
 
     for (ptr1 = str1; *ptr1 != '\0'; ptr1++) {
-        for (i = 0, ptr2 = str2; *ptr2 != '\0' && *(ptr1 + i) == *ptr2; i++, ptr2++);
+        for (i = 0, ptr2 = str2; *ptr2 != '\0' && *(ptr1 + i) == *ptr2; i++, ptr2++) {}
         if (*ptr2 == '\0') {
             return ptr1;
         }

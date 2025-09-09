@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #define BUFSIZE 1024
-char temp[BUFSIZE];
 static void append(FILE *source, FILE *dest);
 
 
 void ch12_ex03(int argc, char **argv) {
-    FILE *fa, *fs;
+    FILE *fa;
+    FILE *fs;
     int files = 0;
     int i;
 
@@ -26,20 +26,22 @@ void ch12_ex03(int argc, char **argv) {
     }
 
     for (i = 2; i < argc; i++) {
-        if (strcmp(argv[1], argv[i]) == 0)
+        if (strcmp(argv[1], argv[i]) == 0) {
             fputs("Can't append file to itself\n", stderr);
-        else if ((fs = fopen(argv[i], "r")) == NULL)
+        } else if ((fs = fopen(argv[i], "r")) == NULL) {
             fprintf(stderr, "Can't open %s\n", argv[i]);
-        else {
+        } else {
             if (setvbuf(fs, NULL, _IOFBF, BUFSIZE) != 0) {
                 fputs("Can't create input buffer\n", stderr);
                 continue;
             }
             append(fs, fa);
-            if (ferror(fs) != 0)
+            if (ferror(fs) != 0) {
                 fprintf(stderr, "Error in reading file %s.\n", argv[i]);
-            if (ferror(fa) != 0)
+            }
+            if (ferror(fa) != 0) {
                 fprintf(stderr, "Error in writing file %s.\n", argv[1]);
+            }
             fclose(fs);
             files++;
             printf("File %s appended.\n", argv[i]);
@@ -51,8 +53,10 @@ void ch12_ex03(int argc, char **argv) {
 }
 
 static void append(FILE *source, FILE *dest) {
+    static char temp[BUFSIZE];
     size_t bytes;
 
-    while ((bytes = fread(temp, sizeof(char), BUFSIZE, source)) > 0)
+    while ((bytes = fread(temp, sizeof(char), BUFSIZE, source)) > 0) {
         fwrite(temp, sizeof(char), bytes, dest);
+    }
 }

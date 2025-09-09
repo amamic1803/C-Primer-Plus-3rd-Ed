@@ -11,13 +11,16 @@ void ch10_ex01(void) {
         {4.3, 4.3, 4.3, 3.0, 2.0, 1.0, 0.2, 0.2, 0.4, 2.4, 3.5, 6.6},
         {8.5, 8.2, 1.2, 1.6, 2.4, 0.0, 5.2, 0.9, 0.3, 0.9, 1.4, 7.2}
     };
-    int year, month;
-    double subtot, total;
+    int year;
+    int month;
+    double subtot;
+    double total;
 
     printf(" YEAR    RAINFALL  (inches)\n");
     for (year = 0, total = 0; year < YRS; year++) {
-        for (month = 0, subtot = 0; month < MONTHS; month++)
+        for (month = 0, subtot = 0; month < MONTHS; month++) {
             subtot += *(*(rain + year) + month);
+        }
         printf("%5d %15.1lf\n", 1990 + year, subtot);
         total += subtot;
     }
@@ -25,8 +28,9 @@ void ch10_ex01(void) {
     printf("MONTHLY AVERAGES:\n\n");
     printf(" Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec\n");
     for (month = 0; month < MONTHS; month++) {
-        for (year = 0, subtot = 0; year < YRS; year++)
+        for (year = 0, subtot = 0; year < YRS; year++) {
             subtot += *(*(rain + year) + month);
+        }
         printf("%4.1lf ", subtot / YRS);
     }
     printf("\n");

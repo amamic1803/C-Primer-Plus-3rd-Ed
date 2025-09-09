@@ -9,7 +9,8 @@ static void show_data(char *data, int cumulative_size);
 void ch16_ex05(void) {
     FILE *fp;
     char temp_str[MAX_STR_LEN];
-    char *ptd, *ptd2;
+    char *ptd = NULL;
+    char *ptd2;
     char str_size;
     int cumulative_size = 0;
     int max;
@@ -18,11 +19,7 @@ void ch16_ex05(void) {
 
     puts("What is the maximum number of string entries?");
     scanf("%d", &max);
-    while (getchar() != '\n');
-    if ((ptd = (char *) malloc(0)) == NULL) {
-        fprintf(stderr, "Memory allocation failed.\n");
-        exit(EXIT_FAILURE);
-    }
+    while (getchar() != '\n') {}
 
     if ((fp = fopen(SAVE_FILE, "r+b")) == NULL) {
         if ((fp = fopen(SAVE_FILE, "wb")) == NULL) {
@@ -31,8 +28,9 @@ void ch16_ex05(void) {
         }
     }
     while (number < max) {
-        if (fread(&str_size, sizeof(char), 1, fp) != 1)
+        if (fread(&str_size, sizeof(char), 1, fp) != 1) {
             break;
+        }
         cumulative_size += str_size + 1;
 
         if ((ptd2 = (char *) realloc(ptd, cumulative_size)) == NULL) {
@@ -54,21 +52,25 @@ void ch16_ex05(void) {
     }
 
 
-    if (number == max)
+    if (number == max) {
         puts("The file is full.");
+    }
     if (number != 0) {
         printf("Existing %d entries:\n", number);
         show_data(ptd, cumulative_size);
     }
 
-    if (number < max)
+    if (number < max) {
         puts("\nEnter the values (empty line to quit):");
+    }
     while (number < max) {
-        if ((fgets(temp_str, MAX_STR_LEN, stdin)) == NULL || temp_str[0] == '\n')
+        if ((fgets(temp_str, MAX_STR_LEN, stdin)) == NULL || temp_str[0] == '\n') {
             break;
+        }
 
-        if (temp_str[strlen(temp_str) - 1] == '\n')
+        if (temp_str[strlen(temp_str) - 1] == '\n') {
             temp_str[strlen(temp_str) - 1] = '\0';
+        }
         number++;
         entered = 1;
 

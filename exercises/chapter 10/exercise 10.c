@@ -18,13 +18,16 @@ void ch10_ex10(void) {
 }
 
 static void year_analysis(const double (*rain)[MONTHS], int years) {
-    int year, month;
-    double subtot, total;
+    int year;
+    int month;
+    double subtot;
+    double total;
 
     printf(" YEAR    RAINFALL  (inches)\n");
     for (year = 0, total = 0; year < years; year++) {
-        for (month = 0, subtot = 0; month < MONTHS; month++)
+        for (month = 0, subtot = 0; month < MONTHS; month++) {
             subtot += *(*(rain + year) + month);
+        }
         printf("%5d %15.1lf\n", 1990 + year, subtot);
         total += subtot;
     }
@@ -32,14 +35,16 @@ static void year_analysis(const double (*rain)[MONTHS], int years) {
 }
 
 static void month_analysis(const double (*rain)[MONTHS], int years) {
-    int year, month;
+    int year;
+    int month;
     double subtot;
 
     printf("MONTHLY AVERAGES:\n\n");
     printf(" Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec\n");
     for (month = 0; month < MONTHS; month++) {
-        for (year = 0, subtot = 0; year < years; year++)
+        for (year = 0, subtot = 0; year < years; year++) {
             subtot += *(*(rain + year) + month);
+        }
         printf("%4.1lf ", subtot / years);
     }
     printf("\n");

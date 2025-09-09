@@ -19,18 +19,22 @@ void ch10_ex09(void) {
 }
 
 static void display_array(const double ar[][COLS], int rows) {
-    int i, j;
+    int i;
+    int j;
     for (i = 0; i < rows; i++) {
-        for (j = 0; j < COLS; j++)
+        for (j = 0; j < COLS; j++) {
             printf("%.1f ", ar[i][j]);
+        }
         putchar('\n');
     }
 }
 
 static void mul2_array(double ar[][COLS], int rows) {
-    int i, j;
+    int i;
+    int j;
     for (i = 0; i < rows; i++) {
-        for (j = 0; j < COLS; j++)
+        for (j = 0; j < COLS; j++) {
             ar[i][j] *= 2;
+        }
     }
 }

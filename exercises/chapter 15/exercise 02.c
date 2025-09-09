@@ -7,7 +7,8 @@ static unsigned short int is_binary(char *s);
 
 
 void ch15_ex02(int argc, char *argv[]) {
-    unsigned short int n1, n2;
+    unsigned short int n1;
+    unsigned short int n2;
 
     if (argc != 3) {
         printf("Usage: %s <binary_number> <binary_number>\n", argv[0]);
@@ -20,7 +21,7 @@ void ch15_ex02(int argc, char *argv[]) {
     }
 
     if (strlen(argv[1]) > (sizeof(int) * 8) || strlen(argv[2]) > (sizeof(unsigned short int) * 8)) {
-        printf("Both arguments must be %llu bits long or less.\n", (unsigned long long int) (sizeof(unsigned short int) * 8));
+        printf("Both arguments must be %llu bits long or less.\n", sizeof(unsigned short int) * 8);
         exit(EXIT_FAILURE);
     }
 
@@ -72,9 +73,9 @@ void ch15_ex02(int argc, char *argv[]) {
 static unsigned short int parse_binary(char *s) {
     unsigned int n = 0;
     while (*s) {
-        n <<= 1;
+        n <<= 1U;
         if (*s == '1') {
-            n |= 1;
+            n |= 1U;
         }
         s++;
     }
@@ -89,9 +90,9 @@ static void print_binary(unsigned short int n) {
     }
 
     for (power--; power > 0; power--) {
-        printf("%d", (n >> power) & 1);
+        printf("%u", (unsigned short int) (n >> power) & 1U);  // NOLINT(clang-analyzer-core.BitwiseShift)
     }
-    printf("%d", n & 1);
+    printf("%u", n & 1U);
 }
 
 static unsigned short int is_binary(char *s) {

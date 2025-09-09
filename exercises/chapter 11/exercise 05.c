@@ -13,8 +13,9 @@ void ch11_ex05(void) {
 
 static int is_within(char ch, const char *str) {
     while (*str != '\0') {
-        if (*str == ch)
+        if (*str == ch) {
             return 1;
+        }
         str++;
     }
     return 0;

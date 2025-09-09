@@ -3,7 +3,9 @@
 
 void ch07_ex01(void) {
     char ch;
-    int num_spaces = 0, num_newlines = 0, num_others = 0;
+    int num_spaces = 0;
+    int num_newlines = 0;
+    int num_others = 0;
 
     printf("Enter text (# to exit):\n");
 

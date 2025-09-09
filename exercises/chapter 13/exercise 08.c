@@ -8,7 +8,8 @@ static void sort_strings(char **string_ptrs, int num_strings);
 void ch13_ex08(void) {
     char words[MAX_WORDS][MAX_WORD_SIZE + 1];
     char *words_ptrs[MAX_WORDS];
-    int i, word_count = 0;
+    int i;
+    int word_count = 0;
 
     printf("Enter words (to stop, type #):\n");
     for (i = 0; i < MAX_WORDS; i++) {
@@ -31,7 +32,8 @@ void ch13_ex08(void) {
 }
 
 static void sort_strings(char **string_ptrs, int num_strings) {
-    int i, j;
+    int i;
+    int j;
     char *temp;
 
     for (i = 0; i < num_strings - 1; i++) {

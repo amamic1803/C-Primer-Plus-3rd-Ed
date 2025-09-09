@@ -3,7 +3,8 @@
 
 void ch05_ex01(void) {
     int time_in_minutes;
-    int minutes, hours;
+    int minutes;
+    int hours;
     const int min_in_hour = 60;  // minutes in an hour
 
     printf("Enter time in minutes:\n");

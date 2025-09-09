@@ -1,6 +1,6 @@
+#include "header 02.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "header 02.h"
 static void showmoview(Item item);
 static char * s_gets(char * st, int max);
 
@@ -8,6 +8,8 @@ static char * s_gets(char * st, int max);
 void ch17_ex02(void) {
     List movies;
     Item temp;
+    Node* node;
+
 
     InitializeList(&movies);
     if (FullList(movies)) {
@@ -18,7 +20,7 @@ void ch17_ex02(void) {
     while (s_gets(temp.title, TSIZE) != NULL && temp.title[0] != '\0') {
         puts("Enter your rating <0-10>:");
         scanf("%d", &temp.rating);
-        while (getchar() != '\n');
+        while (getchar() != '\n') {}
         if (!AddItem(temp, &movies)) {
             fprintf(stderr, "Problem allocating memory\n");
             break;
@@ -29,13 +31,20 @@ void ch17_ex02(void) {
         }
         puts("Enter next movie title (empty line to stop):");
     }
-    if (EmptyList(movies))
+    if (EmptyList(movies)) {
         printf("No data entered. ");
-    else {
+    } else {
         printf("Here is the movie list:\n");
         Traverse(movies, showmoview);
     }
     printf("Bye!\n");
+
+    node = movies.head;
+    while (node != NULL) {
+        movies.head = node->next;
+        free(node);
+        node = movies.head;
+    }
 }
 
 static void showmoview(Item item) {
@@ -44,17 +53,18 @@ static void showmoview(Item item) {
 
 static char * s_gets(char * st, int max) {
     int i = 0;
-    char ch;
+    char ch = EOF;
 
-    while (i < (max - 1) && (ch = (char) getchar()) != '\n' && ch != EOF)
+    while (i < (max - 1) && (ch = (char) getchar()) != '\n' && ch != EOF) {
         st[i++] = ch;
+    }
 
     st[i] = '\0';
 
-    if (ch != EOF)
+    if (ch != EOF) {
         return st;
-    else
-        return NULL;
+    }
+    return NULL;
 }
 
 
@@ -71,15 +81,17 @@ static BOOLEAN EmptyList(List l) {
     return l.head == NULL;
 }
 
-static BOOLEAN FullList(List) {
+// NOLINTNEXTLINE(misc-unused-parameters)
+static BOOLEAN FullList(List l) {
     Node * pt;
     BOOLEAN full;
 
     pt = (Node *) malloc(sizeof(Node));
-    if (pt == NULL)
+    if (pt == NULL) {
         full = True;
-    else
+    } else {
         full = False;
+    }
     free(pt);
     return full;
 }
@@ -99,13 +111,14 @@ static BOOLEAN AddItem(Item item, List * plist) {
     Node * pnew;
 
     pnew = (Node *) malloc(sizeof(Node));
-    if (pnew == NULL)
+    if (pnew == NULL) {
         return False;
+    }
     CopyToNode(item, pnew);
     pnew->next = NULL;
-    if (plist->head == NULL)
+    if (plist->head == NULL) {
         plist->head = pnew;
-    else {
+    } else {
         plist->end->next = pnew;
     }
     plist->end = pnew;

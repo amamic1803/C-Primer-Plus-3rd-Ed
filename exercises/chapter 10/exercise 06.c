@@ -12,7 +12,8 @@ void ch10_ex06(void) {
         {1, 2, 3, 4, 5},
     };
     int array2[ARRAY_SIZE][ARRAY_SIZE];
-    int i, j;
+    int i;
+    int j;
 
     printf("original array:\n");
     for (i = 0; i < ARRAY_SIZE; i++) {

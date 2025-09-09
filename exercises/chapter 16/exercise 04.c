@@ -15,8 +15,13 @@ void ch16_ex04(void) {
 
     puts("What is the maximum number of string entries?");
     scanf("%d", &max);
-    while (getchar() != '\n');
-    ptd = (char (*)[STRLEN]) malloc(max * STRLEN * sizeof(char));
+    if (max < 1 || max > 100000) {
+        puts("Bad input. Goodbye.");
+        exit(EXIT_FAILURE);
+    }
+    while (getchar() != '\n') {}
+    // NOLINTNEXTLINE(clang-analyzer-optin.taint.TaintedAlloc)
+    ptd = (char (*)[STRLEN]) malloc((size_t) max * sizeof(char[STRLEN]));
     if (ptd == NULL) {
         puts("Memory allocation failed. Goodbye.");
         exit(EXIT_FAILURE);
@@ -28,33 +33,40 @@ void ch16_ex04(void) {
             exit(EXIT_FAILURE);
         }
     }
-    while (number < max && fread(&ptd[number], STRLEN * sizeof(char), 1, fp) == 1)
+    while (number < max && fread(&ptd[number], STRLEN * sizeof(char), 1, fp) == 1) {
         number++;
-
-    if (number == max)
-        puts("The file is full.");
-    if (number != 0) {
-        printf("Existing %d entries:\n", number);
-        for (i = 0; i < number; i++)
-            printf("%s\n", ptd[i]);
     }
 
-    if (number < max)
-        puts("\nEnter the values (empty line to quit):");
-    while (number < max) {
-        if ((fgets(ptd[number], STRLEN, stdin)) == NULL || ptd[number][0] == '\n')
-            break;
+    if (number == max) {
+        puts("The file is full.");
+    }
+    if (number != 0) {
+        printf("Existing %d entries:\n", number);
+        for (i = 0; i < number; i++) {
+            printf("%s\n", ptd[i]);
+        }
+    }
 
-        if (ptd[number][strlen(ptd[number]) - 1] == '\n')
+    if (number < max) {
+        puts("\nEnter the values (empty line to quit):");
+    }
+    while (number < max) {
+        if ((fgets(ptd[number], STRLEN, stdin)) == NULL || ptd[number][0] == '\n') {
+            break;
+        }
+
+        if (ptd[number][strlen(ptd[number]) - 1] == '\n') {
             ptd[number][strlen(ptd[number]) - 1] = '\0';
+        }
         number++;
         entered = 1;
     }
 
     if (entered) {
         printf("\nHere are your %d entries:\n", number);
-        for (i = 0; i < number; i++)
+        for (i = 0; i < number; i++) {
             printf("%s\n", ptd[i]);
+        }
     }
 
     rewind(fp);

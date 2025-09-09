@@ -1,3 +1,6 @@
+#ifndef INFO12_H
+#define INFO12_H
+
 #define EXERCISES_CH12 12
 
 void ch12_ex01(int argc, char **argv);
@@ -12,3 +15,5 @@ void ch12_ex09(int argc, char **argv);
 void ch12_ex10(void);
 void ch12_ex11(void);
 void ch12_ex12(void);
+
+#endif // INFO12_H

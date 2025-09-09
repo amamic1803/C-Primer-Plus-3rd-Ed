@@ -1,7 +1,7 @@
+#include "header 04.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "header 04.h"
 #define MIN_PER_HR 60.0
 BOOLEAN newcustomer(double x);
 Item customertime(long when);
@@ -13,7 +13,8 @@ void ch17_ex04(void) {
     Item temp;
     int hours;
     int perhour;
-    long cycle, cyclelimit;
+    long cycle;
+    long cyclelimit;
     long turnaways = 0;
     long customers = 0;
     long served = 0;
@@ -31,7 +32,11 @@ void ch17_ex04(void) {
     cyclelimit = (long) MIN_PER_HR * hours;
     puts("Enter the average number of customers per hour:");
     scanf("%d", &perhour);
-    min_per_cust = MIN_PER_HR / perhour;
+    if (perhour <= 0) {
+        puts("Per hour must be greater than 0.");
+        exit(EXIT_FAILURE);
+    }
+    min_per_cust = MIN_PER_HR / perhour;  // NOLINT(clang-analyzer-optin.taint.TaintedDiv)
 
     for (cycle = 0; cycle < cyclelimit; cycle++) {
         if (newcustomer(min_per_cust)) {
@@ -74,14 +79,16 @@ void ch17_ex04(void) {
     } else {
         puts("No customers!");
     }
+
+    while (DeQueue(&temp, &line)) {}
+    while (DeQueue(&temp, &line2)) {}
 }
 
 BOOLEAN newcustomer(double x) {
     if (rand() * x / RAND_MAX < 1) {
         return True;
-    } else {
-        return False;
     }
+    return False;
 }
 
 Item customertime(long when) {

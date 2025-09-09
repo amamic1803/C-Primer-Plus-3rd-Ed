@@ -2,182 +2,35 @@ cmake_minimum_required(VERSION 3.29)
 
 project(C_Primer_Plus C)
 
-set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
 
+find_program(CLANG_TIDY_EXE NAMES clang-tidy REQUIRED)
+set(CMAKE_C_CLANG_TIDY "${CLANG_TIDY_EXE};--config-file=${CMAKE_SOURCE_DIR}/.clang-tidy")
+
+add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+
+
+# executable
+file(GLOB_RECURSE EXERCISE_SOURCES
+        exercises/*.c
+        exercises/*.h
+)
 add_executable(
         C_Primer_Plus
         main.c
         exercises.h
-        "exercises/chapter 01/info.h"
-        "exercises/chapter 02/info.h"
-        "exercises/chapter 03/info.h"
-        "exercises/chapter 04/info.h"
-        "exercises/chapter 05/info.h"
-        "exercises/chapter 06/info.h"
-        "exercises/chapter 07/info.h"
-        "exercises/chapter 08/info.h"
-        "exercises/chapter 09/info.h"
-        "exercises/chapter 10/info.h"
-        "exercises/chapter 11/info.h"
-        "exercises/chapter 12/info.h"
-        "exercises/chapter 13/info.h"
-        "exercises/chapter 14/info.h"
-        "exercises/chapter 15/info.h"
-        "exercises/chapter 16/info.h"
-        "exercises/chapter 17/info.h"
-        "exercises/chapter 01/exercise 01.c"
-        "exercises/chapter 02/exercise 01.c"
-        "exercises/chapter 02/exercise 02.c"
-        "exercises/chapter 02/exercise 03.c"
-        "exercises/chapter 02/exercise 04.c"
-        "exercises/chapter 02/exercise 05.c"
-        "exercises/chapter 02/exercise 06.c"
-        "exercises/chapter 03/exercise 01.c"
-        "exercises/chapter 03/exercise 02.c"
-        "exercises/chapter 03/exercise 03.c"
-        "exercises/chapter 03/exercise 04.c"
-        "exercises/chapter 03/exercise 05.c"
-        "exercises/chapter 03/exercise 06.c"
-        "exercises/chapter 04/exercise 01.c"
-        "exercises/chapter 04/exercise 02.c"
-        "exercises/chapter 04/exercise 03.c"
-        "exercises/chapter 04/exercise 04.c"
-        "exercises/chapter 04/exercise 05.c"
-        "exercises/chapter 05/exercise 01.c"
-        "exercises/chapter 05/exercise 02.c"
-        "exercises/chapter 05/exercise 03.c"
-        "exercises/chapter 05/exercise 04.c"
-        "exercises/chapter 05/exercise 05.c"
-        "exercises/chapter 05/exercise 06.c"
-        "exercises/chapter 06/exercise 01.c"
-        "exercises/chapter 06/exercise 02.c"
-        "exercises/chapter 06/exercise 03.c"
-        "exercises/chapter 06/exercise 04.c"
-        "exercises/chapter 06/exercise 05.c"
-        "exercises/chapter 06/exercise 06.c"
-        "exercises/chapter 06/exercise 07.c"
-        "exercises/chapter 06/exercise 08.c"
-        "exercises/chapter 06/exercise 09.c"
-        "exercises/chapter 06/exercise 10.c"
-        "exercises/chapter 06/exercise 11.c"
-        "exercises/chapter 06/exercise 12.c"
-        "exercises/chapter 06/exercise 13.c"
-        "exercises/chapter 06/exercise 14.c"
-        "exercises/chapter 07/exercise 01.c"
-        "exercises/chapter 07/exercise 02.c"
-        "exercises/chapter 07/exercise 03.c"
-        "exercises/chapter 07/exercise 04.c"
-        "exercises/chapter 07/exercise 05.c"
-        "exercises/chapter 07/exercise 06.c"
-        "exercises/chapter 07/exercise 07.c"
-        "exercises/chapter 07/exercise 08.c"
-        "exercises/chapter 07/exercise 09.c"
-        "exercises/chapter 07/exercise 10.c"
-        "exercises/chapter 08/exercise 01.c"
-        "exercises/chapter 08/exercise 02.c"
-        "exercises/chapter 08/exercise 03.c"
-        "exercises/chapter 08/exercise 04.c"
-        "exercises/chapter 08/exercise 05.c"
-        "exercises/chapter 08/exercise 06.c"
-        "exercises/chapter 08/exercise 07.c"
-        "exercises/chapter 09/exercise 01.c"
-        "exercises/chapter 09/exercise 02.c"
-        "exercises/chapter 09/exercise 03.c"
-        "exercises/chapter 09/exercise 04.c"
-        "exercises/chapter 09/exercise 05.c"
-        "exercises/chapter 09/exercise 06.c"
-        "exercises/chapter 09/exercise 07.c"
-        "exercises/chapter 09/exercise 08.c"
-        "exercises/chapter 09/exercise 09.c"
-        "exercises/chapter 10/exercise 01.c"
-        "exercises/chapter 10/exercise 02.c"
-        "exercises/chapter 10/exercise 03.c"
-        "exercises/chapter 10/exercise 04.c"
-        "exercises/chapter 10/exercise 05.c"
-        "exercises/chapter 10/exercise 06.c"
-        "exercises/chapter 10/exercise 07.c"
-        "exercises/chapter 10/exercise 08.c"
-        "exercises/chapter 10/exercise 09.c"
-        "exercises/chapter 10/exercise 10.c"
-        "exercises/chapter 10/exercise 11.c"
-        "exercises/chapter 11/exercise 01.c"
-        "exercises/chapter 11/exercise 02.c"
-        "exercises/chapter 11/exercise 03.c"
-        "exercises/chapter 11/exercise 04.c"
-        "exercises/chapter 11/exercise 05.c"
-        "exercises/chapter 11/exercise 06.c"
-        "exercises/chapter 11/exercise 07.c"
-        "exercises/chapter 11/exercise 08.c"
-        "exercises/chapter 11/exercise 09.c"
-        "exercises/chapter 11/exercise 10.c"
-        "exercises/chapter 11/exercise 11.c"
-        "exercises/chapter 11/exercise 12.c"
-        "exercises/chapter 11/exercise 13.c"
-        "exercises/chapter 11/exercise 14.c"
-        "exercises/chapter 11/exercise 15.c"
-        "exercises/chapter 12/exercise 01.c"
-        "exercises/chapter 12/exercise 02.c"
-        "exercises/chapter 12/exercise 03.c"
-        "exercises/chapter 12/exercise 04.c"
-        "exercises/chapter 12/exercise 05.c"
-        "exercises/chapter 12/exercise 06.c"
-        "exercises/chapter 12/exercise 07.c"
-        "exercises/chapter 12/exercise 08.c"
-        "exercises/chapter 12/exercise 09.c"
-        "exercises/chapter 12/exercise 10.c"
-        "exercises/chapter 12/exercise 11.c"
-        "exercises/chapter 12/exercise 12.c"
-        "exercises/chapter 13/exercise 01.c"
-        "exercises/chapter 13/exercise 02.c"
-        "exercises/chapter 13/exercise 03.c"
-        "exercises/chapter 13/exercise 04.c"
-        "exercises/chapter 13/exercise 05.c"
-        "exercises/chapter 13/exercise 06.c"
-        "exercises/chapter 13/exercise 07.c"
-        "exercises/chapter 13/exercise 08.c"
-        "exercises/chapter 13/exercise 09.c"
-        "exercises/chapter 13/exercise 10.c"
-        "exercises/chapter 13/exercise 11.c"
-        "exercises/chapter 14/exercise 01.c"
-        "exercises/chapter 14/exercise 02.c"
-        "exercises/chapter 14/exercise 03.c"
-        "exercises/chapter 14/exercise 04.c"
-        "exercises/chapter 14/exercise 05.c"
-        "exercises/chapter 14/exercise 06.c"
-        "exercises/chapter 14/exercise 07.c"
-        "exercises/chapter 14/exercise 08.c"
-        "exercises/chapter 14/exercise 09.c"
-        "exercises/chapter 14/exercise 10.c"
-        "exercises/chapter 15/exercise 01.c"
-        "exercises/chapter 15/exercise 02.c"
-        "exercises/chapter 15/exercise 03.c"
-        "exercises/chapter 15/exercise 04.c"
-        "exercises/chapter 15/exercise 05.c"
-        "exercises/chapter 15/exercise 06.c"
-        "exercises/chapter 16/exercise 01.c"
-        "exercises/chapter 16/header 01.h"
-        "exercises/chapter 16/exercise 02.c"
-        "exercises/chapter 16/header 02.h"
-        "exercises/chapter 16/exercise 03.c"
-        "exercises/chapter 16/exercise 04.c"
-        "exercises/chapter 16/exercise 05.c"
-        "exercises/chapter 16/exercise 06.c"
-        "exercises/chapter 16/exercise 07.c"
-        "exercises/chapter 16/exercise 08.c"
-        "exercises/chapter 17/exercise 01.c"
-        "exercises/chapter 17/exercise 02.c"
-        "exercises/chapter 17/header 02.h"
-        "exercises/chapter 17/exercise 03.c"
-        "exercises/chapter 17/header 03.h"
-        "exercises/chapter 17/exercise 04.c"
-        "exercises/chapter 17/header 04.h"
-        "exercises/chapter 17/exercise 05.c"
-        "exercises/chapter 17/exercise 06.c"
-        "exercises/chapter 17/exercise 07.c"
-        "exercises/chapter 17/exercise 08.c"
+        ${EXERCISE_SOURCES}
 )
-
-target_link_libraries(C_Primer_Plus m)
+target_link_libraries(C_Primer_Plus
+        $<$<PLATFORM_ID:Linux>:m>
+)
+set_target_properties(C_Primer_Plus PROPERTIES
+        LANGUAGE C
+        LINKER_LANGUAGE C
+        OUTPUT_NAME C_Primer_Plus
+)
+target_compile_options(C_Primer_Plus PRIVATE
+        $<$<CXX_COMPILER_ID:GNU,Clang>:-Wall -Wextra -Wpedantic -Werror>
+)

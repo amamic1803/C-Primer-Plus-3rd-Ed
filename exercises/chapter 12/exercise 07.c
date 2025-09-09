@@ -22,17 +22,21 @@ void ch12_ex07(void) {
         exit(EXIT_FAILURE);
     }
 
-    while ((ch = (char) getc(fp)) != EOF)
-        if (ch == '\n')
+    while ((ch = (char) getc(fp)) != EOF) {
+        if (ch == '\n') {
             lines_in_file++;
+        }
+    }
+
     word_index = lines_in_file + 1;
     rewind(fp);
 
     puts("Enter words to add to the file; press the Enter");
     puts("key at the beginning of a line to terminate.");
     while (fgets(words, MAX, stdin) != NULL && words[0] != '\n') {
-        if ((new_line = strchr(words, '\n')) != NULL)
+        if ((new_line = strchr(words, '\n')) != NULL) {
             *new_line = '\0';
+        }
 
         i = 0;
         word_flag = 0;
@@ -62,13 +66,15 @@ void ch12_ex07(void) {
 
     puts("File contents:");
     rewind(fp);
-    while (fscanf(fp, "%s", words) == 1)
+    while (fscanf(fp, "%s", words) == 1) {
         if (!num_flag) {
             puts(words);
             num_flag = 1;
         } else {
             num_flag = 0;
         }
-    if (fclose(fp) != 0)
+    }
+    if (fclose(fp) != 0) {
         fprintf(stderr, "Error closing file\n");
+    }
 }

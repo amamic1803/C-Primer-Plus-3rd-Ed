@@ -17,8 +17,9 @@ void ch13_ex11(void) {
 
     puts("Enter the name of the file to be read:");
     fgets(filename, MAX_LINE, stdin);
-    if (filename[strlen(filename) - 1] == '\n')
+    if (filename[strlen(filename) - 1] == '\n') {
         filename[strlen(filename) - 1] = '\0';
+    }
 
     if ((fp = fopen(filename, "r")) == NULL) {
         fprintf(stderr, "Can't open %s\n", filename);
@@ -27,15 +28,17 @@ void ch13_ex11(void) {
 
     for (i = 0; i < NAMES; i++) {
         fgets(names[i], MAX_LINE, fp);
-        if (names[i][strlen(names[i]) - 1] == '\n')
+        if (names[i][strlen(names[i]) - 1] == '\n') {
             names[i][strlen(names[i]) - 1] = '\0';
+        }
         names_ptrs[i] = names[i];
     }
 
     sort(names_ptrs, NAMES);
 
-    for (i = 0; i < NAMES; i++)
+    for (i = 0; i < NAMES; i++) {
         printf("%-30s|%6.2lf\n", names_ptrs[i], (double) extract_average(names_ptrs[i]));
+    }
 
     if (fclose(fp) != 0) {
         fprintf(stderr, "Error closing file\n");
@@ -50,7 +53,7 @@ static long double extract_average(const char *word) {
     int curr_num;
     int i = 0;
 
-    while (word[i++] != ':');
+    while (word[i++] != ':') {}
     while (read_nums < 3) {
         if (isdigit(word[i])) {
             if (!num_flag) {
@@ -73,7 +76,8 @@ static long double extract_average(const char *word) {
 }
 
 static void sort(char **strings, int num_strings) {
-    int i, j;
+    int i;
+    int j;
     char *temp;
 
     for (i = 0; i < num_strings - 1; i++) {

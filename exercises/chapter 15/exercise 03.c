@@ -1,22 +1,22 @@
 #include <stdio.h>
-static int on_bits(int num);
+static unsigned int on_bits(unsigned int num);
 
 
 void ch15_ex03(void) {
-    int input_num;
+    unsigned int input_num;
 
     printf("Enter an integer (q to quit):\n");
-    while (scanf("%d", &input_num) == 1) {
-        printf("The number of on bits in %d is %d.\n", input_num, on_bits(input_num));
+    while (scanf("%u", &input_num) == 1) {
+        printf("The number of on bits in %d is %u.\n", input_num, on_bits(input_num));
         printf("Enter an integer (q to quit):\n");
     }
 }
 
-static int on_bits(int num) {
-    int count = 0;
+static unsigned int on_bits(unsigned int num) {
+    unsigned int count = 0;
     while (num > 0) {
-        count += num & 1;
-        num >>= 1;
+        count += num & 1U;
+        num >>= 1U;
     }
     return count;
 }

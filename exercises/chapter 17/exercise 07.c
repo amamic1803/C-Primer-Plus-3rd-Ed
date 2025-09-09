@@ -21,6 +21,8 @@ static void AddWord(const char *word, BinaryTree *tree);
 static void AddWordInternal(const char *word, Node *node);
 static void TraverseTree(const BinaryTree *tree, void (*pfun)(Item item));
 static void TraverseTreeInternal(Node *node, void (*pfun)(Item item));
+static void ClearTree(BinaryTree *tree);
+static void ClearTreeInternal(Node *node);
 
 static void PrintItem(Item item);
 static int SearchWord(const char *word, const BinaryTree *tree);
@@ -39,15 +41,17 @@ void ch17_ex07(void) {
 
     puts("Enter filename:");
     fgets(filename, MAX_STR_LEN, stdin);
-    if (filename[strlen(filename) - 1] == '\n')
+    if (filename[strlen(filename) - 1] == '\n') {
         filename[strlen(filename) - 1] = '\0';
+    }
 
     if ((fp = fopen(filename, "r")) == NULL) {
         fprintf(stderr, "Can't open %s\n", filename);
         exit(EXIT_FAILURE);
     }
-    while (read_word(fp, word, MAX_STR_LEN) == 1)
+    while (read_word(fp, word, MAX_STR_LEN) == 1) {
         AddWord(word, &tree);
+    }
 
     if (fclose(fp) != 0) {
         fprintf(stderr, "Error closing file\n");
@@ -60,7 +64,7 @@ void ch17_ex07(void) {
     printf("3) quit\n");
     printf("Enter choice:\n");
     while (scanf("%d", &choice) == 1) {
-        while (getchar() != '\n');
+        while (getchar() != '\n') {}
         putchar('\n');
         switch (choice) {
             case 1:
@@ -69,8 +73,9 @@ void ch17_ex07(void) {
             case 2:
                 puts("Enter word to search for:");
                 fgets(word, MAX_STR_LEN, stdin);
-                if (word[strlen(word) - 1] == '\n')
+                if (word[strlen(word) - 1] == '\n') {
                     word[strlen(word) - 1] = '\0';
+                }
                 printf("Occurrences of %s: %d\n", word, SearchWord(word, &tree));
                 break;
             case 3:
@@ -86,54 +91,75 @@ void ch17_ex07(void) {
         printf("Enter choice:\n");
     }
     out:;
+
+    ClearTree(&tree);
 }
 
+static void ClearTree(BinaryTree *tree) {
+    if (tree->root != NULL) {
+        ClearTreeInternal(tree->root);
+    }
+    tree->root = NULL;
+}
+static void ClearTreeInternal(Node *node) {
+    if (node->left != NULL) {
+        ClearTreeInternal(node->left);
+    }
+    if (node->right != NULL) {
+        ClearTreeInternal(node->right);
+    }
+    free(node);
+}
 
 static void PrintItem(Item item) {
     printf("%s\t%d\n", item.word, item.count);
 }
 
 static int SearchWord(const char *word, const BinaryTree *tree) {
-    if (tree->root == NULL)
+    if (tree->root == NULL) {
         return 0;
+    }
     return SearchWordInternal(word, tree->root);
 }
 
 static int SearchWordInternal(const char *word, const Node *node) {
     int cmp = strcmp(word, node->item.word);
 
-    if (cmp == 0)
+    if (cmp == 0) {
         return node->item.count;
-    else if (cmp < 0) {
-        if (node->left == NULL)
-            return 0;
-        else
-            return SearchWordInternal(word, node->left);
-    } else {
-        if (node->right == NULL)
-            return 0;
-        else
-            return SearchWordInternal(word, node->right);
     }
+    if (cmp < 0) {
+        if (node->left == NULL) {
+            return 0;
+        }
+        return SearchWordInternal(word, node->left);
+    }
+
+    if (node->right == NULL) {
+            return 0;
+    }
+    return SearchWordInternal(word, node->right);
 }
 
 static int read_word(FILE *fp, char *word, int max_len) {
-    char ch;
+    char ch = EOF;
     int i = 0;
 
-    while (isalnum(ch = (char) getc(fp)) == 0 && ch != EOF);
-    if (ch == EOF)
+    while (isalnum(ch = (char) getc(fp)) == 0 && ch != EOF) {}
+    if (ch == EOF) {
         return 0;
+    }
     ungetc(ch, fp);
 
-    while (isalnum(ch = (char) getc(fp)) != 0 && i < max_len - 1)
+    while (isalnum(ch = (char) getc(fp)) != 0 && i < max_len - 1) {
         word[i++] = (char) tolower(ch);
+    }
     word[i] = '\0';
 
-    if (ch == EOF)
+    if (ch == EOF) {
         return 0;
-    else
-        return 1;
+    }
+    return 1;
 }
 
 
@@ -194,14 +220,17 @@ static void AddWordInternal(const char *word, Node *node) {
 }
 
 static void TraverseTree(const BinaryTree *tree, void (*pfun)(Item item)) {
-    if (tree->root != NULL)
+    if (tree->root != NULL) {
         TraverseTreeInternal(tree->root, pfun);
+    }
 }
 
 static void TraverseTreeInternal(Node *node, void (*pfun)(Item item)) {
-    if (node->left != NULL)
+    if (node->left != NULL) {
         TraverseTreeInternal(node->left, pfun);
+    }
     (*pfun)(node->item);
-    if (node->right != NULL)
+    if (node->right != NULL) {
         TraverseTreeInternal(node->right, pfun);
+    }
 }

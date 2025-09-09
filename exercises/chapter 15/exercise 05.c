@@ -3,7 +3,8 @@ static void rotate_l(unsigned int *n, unsigned int b);
 
 
 void ch15_ex05(void) {
-    unsigned int n, b;
+    unsigned int n;
+    unsigned int b;
 
     printf("Enter an unsigned integer and the number of bits to be rotated (q to exit):\n");
     while (scanf("%u %u", &n, &b) == 2) {
@@ -20,8 +21,12 @@ static void rotate_l(unsigned int *n, unsigned int b) {
     unsigned int i;
 
     while (temp > 0) {
-        temp >>= 1;
+        temp >>= 1U;
         length++;
+    }
+
+    if (length == 0) {
+        return;
     }
 
     if (length < b) {
@@ -30,10 +35,10 @@ static void rotate_l(unsigned int *n, unsigned int b) {
 
     for (i = 0; i < length; i++) {
         if (i < b) {
-            mask <<= 1;
-            mask |= 1;
+            mask <<= 1U;
+            mask |= 1U;
         } else {
-            mask <<= 1;
+            mask <<= 1U;
         }
     }
 

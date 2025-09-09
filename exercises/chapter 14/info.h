@@ -1,3 +1,6 @@
+#ifndef INFO14_h
+#define INFO14_h
+
 #define EXERCISES_CH14 10
 
 void ch14_ex01(void);
@@ -10,3 +13,5 @@ void ch14_ex07(void);
 void ch14_ex08(void);
 void ch14_ex09(void);
 void ch14_ex10(void);
+
+#endif // INFO14_h

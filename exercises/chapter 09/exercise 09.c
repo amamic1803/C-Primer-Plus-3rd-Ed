@@ -3,7 +3,8 @@ static void to_base(int n, int base);
 
 
 void ch09_ex09(void) {
-    int n, base;
+    int n;
+    int base;
     printf("Enter a number and a base:\n");
     scanf("%d %d", &n, &base);
     if (!(base >= 2 && base <= 10)) {

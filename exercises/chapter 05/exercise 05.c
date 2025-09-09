@@ -3,7 +3,8 @@
 
 void ch05_ex05(void) {
     int input_num;
-    int sum, count;
+    int sum;
+    int count;
 
     printf("Enter a number:\n");
     scanf("%d", &input_num);

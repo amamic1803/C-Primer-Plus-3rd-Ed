@@ -19,7 +19,8 @@ static void process_flight(struct seat *seats);
 void ch14_ex09(void) {
     FILE *fp;
     struct seat seats[FLIGHTS][SEATS];
-    int i, j;
+    int i;
+    int j;
     char choice;
 
     if ((fp = fopen(FILENAME, "r+b")) == NULL) {
@@ -27,15 +28,16 @@ void ch14_ex09(void) {
             printf("Can't create %s file.\n", FILENAME);
             exit(EXIT_FAILURE);
         }
-        for (j = 0; j < FLIGHTS; j++)
+        for (j = 0; j < FLIGHTS; j++) {
             for (i = 0; i < SEATS; i++) {
                 seats[j][i].id = i + 1;
                 seats[j][i].booked = 0;
                 seats[j][i].last_name[0] = '\0';
                 seats[j][i].first_name[0] = '\0';
             }
+        }
     } else {
-        fread(seats, sizeof(struct seat), SEATS * FLIGHTS, fp);
+        fread(seats, sizeof(struct seat), (size_t) SEATS * FLIGHTS, fp);
     }
 
     while (1) {
@@ -48,8 +50,9 @@ void ch14_ex09(void) {
         printf("Enter your choice:\n");
 
         choice = (char) tolower(getchar());
-        if (choice != '\n')
-            while (getchar() != '\n');
+        if (choice != '\n') {
+            while (getchar() != '\n') {}
+        }
         putchar('\n');
 
         switch (choice) {
@@ -81,7 +84,7 @@ void ch14_ex09(void) {
     out_flights:;
 
     rewind(fp);
-    fwrite(seats, sizeof(struct seat), SEATS * FLIGHTS, fp);
+    fwrite(seats, sizeof(struct seat), (size_t) SEATS * FLIGHTS, fp);
     if (fclose(fp) != 0) {
         printf("Error in closing file %s.\n", FILENAME);
         exit(EXIT_FAILURE);
@@ -91,9 +94,11 @@ void ch14_ex09(void) {
 static int empty_seats(struct seat *seats) {
     int i;
     int empty_seats = 0;
-    for (i = 0; i < SEATS; i++)
-        if (seats[i].booked == 0)
+    for (i = 0; i < SEATS; i++) {
+        if (seats[i].booked == 0) {
             empty_seats++;
+        }
+    }
     return empty_seats;
 }
 
@@ -103,11 +108,13 @@ static void process_flight(struct seat *seats) {
     char last_name[MAX_NAME_LEN];
     char first_name[MAX_NAME_LEN];
     struct seat *seats_ptrs[SEATS];
-    int i, j;
+    int i;
+    int j;
     char choice;
 
-    for (i = 0; i < SEATS; i++)
+    for (i = 0; i < SEATS; i++) {
         seats_ptrs[i] = &seats[i];
+    }
 
     while (1) {
         printf("To choose a function, enter its letter label:\n");
@@ -120,8 +127,9 @@ static void process_flight(struct seat *seats) {
         printf("Enter your choice:\n");
 
         choice = (char) tolower(getchar());
-        if (choice != '\n')
-            while (getchar() != '\n');
+        if (choice != '\n') {
+            while (getchar() != '\n') {}
+        }
 
         switch (choice) {
             case 'a':
@@ -162,7 +170,7 @@ static void process_flight(struct seat *seats) {
                 }
                 printf("Enter the seat id:\n");
                 scanf("%d", &seat_id);
-                while (getchar() != '\n');
+                while (getchar() != '\n') {}
                 if (seat_id < 1 || seat_id > SEATS) {
                     printf("Invalid seat id.\n\n");
                     break;
@@ -174,13 +182,15 @@ static void process_flight(struct seat *seats) {
 
                 printf("Enter the customer's first name:\n");
                 fgets(first_name, MAX_NAME_LEN, stdin);
-                if (first_name[strlen(first_name) - 1] == '\n')
+                if (first_name[strlen(first_name) - 1] == '\n') {
                     first_name[strlen(first_name) - 1] = '\0';
+                }
 
                 printf("Enter the customer's last name:\n");
                 fgets(last_name, MAX_NAME_LEN, stdin);
-                if (last_name[strlen(last_name) - 1] == '\n')
+                if (last_name[strlen(last_name) - 1] == '\n') {
                     last_name[strlen(last_name) - 1] = '\0';
+                }
 
                 putchar('\n');
 
@@ -192,7 +202,7 @@ static void process_flight(struct seat *seats) {
             case 'e':
                 printf("\nEnter the seat id:\n");
                 scanf("%d", &seat_id);
-                while (getchar() != '\n');
+                while (getchar() != '\n') {}
                 if (seat_id < 1 || seat_id > SEATS) {
                     printf("Invalid seat id.\n\n");
                     break;

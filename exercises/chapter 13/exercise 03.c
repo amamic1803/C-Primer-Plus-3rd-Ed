@@ -23,14 +23,18 @@ void ch13_ex03(void) {
 }
 
 static void sort(int array[], int limit) {
-    int top, search, temp, i;
+    int top;
+    int search;
+    int temp;
+    int i;
 
     for (top = 0; top < limit - 1; top++) {
         i = top;
-        for (search = top + 1; search < limit; search++)
+        for (search = top + 1; search < limit; search++) {
             if (array[search] > array[top] && array[search] > array[i]) {
                 i = search;
             }
+        }
         if (i != top) {
             temp = array[top];
             array[top] = array[i];

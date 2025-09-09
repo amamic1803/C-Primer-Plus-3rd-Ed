@@ -2,7 +2,8 @@
 
 
 void ch06_ex07(void) {
-    double fp1, fp2;
+    double fp1;
+    double fp2;
     int status;
 
     printf("Enter q to exit!\nEnter 2 floats: \n");

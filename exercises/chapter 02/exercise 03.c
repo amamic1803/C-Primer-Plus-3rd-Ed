@@ -2,7 +2,8 @@
 
 
 void ch02_ex03(void) {
-    int age, days;
+    int age;
+    int days;
 
     age = 18;
     days = age * 365;

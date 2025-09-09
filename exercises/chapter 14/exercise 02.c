@@ -8,7 +8,7 @@ struct month_info {
     int days;
     int month_num;
 };
-static struct month_info months[12] = {
+static const struct month_info months[12] = {
     {"January", "Jan", 31, 1},
     {"February", "Feb", 28, 2},
     {"March", "Mar", 31, 3},
@@ -25,9 +25,11 @@ static struct month_info months[12] = {
 
 
 void ch14_ex02(void) {
-    int day, year;
+    int day;
+    int year;
     char month[10];
-    int i, j;
+    int i;
+    int j;
     char *p;
     int sum = 0;
 
@@ -36,29 +38,31 @@ void ch14_ex02(void) {
         printf("Invalid input.\n");
         exit(EXIT_FAILURE);
     }
-    while (getchar() != '\n');
+    while (getchar() != '\n') {}
 
     printf("Enter month:\n");
     fgets(month, 10, stdin);
-    if (month[strlen(month) - 1] == '\n')
+    if (month[strlen(month) - 1] == '\n') {
         month[strlen(month) - 1] = '\0';
+    }
     p = month;
     while (*p != '\0') {
-        *p = tolower(*p);
+        *p = (char) tolower(*p);
         p++;
     }
-    month[0] = toupper(month[0]);
+    month[0] = (char) toupper(month[0]);
 
     printf("Enter year:\n");
     if (scanf("%d", &year) != 1) {
         printf("Invalid input.\n");
         exit(EXIT_FAILURE);
     }
-    while (getchar() != '\n');
+    while (getchar() != '\n') {}
 
     for (i = 0; i < 12; i++) {
-        if (strcmp(month, months[i].name) == 0 || strcmp(month, months[i].abbrev) == 0 || strtol(month, NULL, 10) == months[i].month_num)
+        if (strcmp(month, months[i].name) == 0 || strcmp(month, months[i].abbrev) == 0 || strtol(month, NULL, 10) == months[i].month_num) {
             break;
+        }
     }
 
     if (i == 12) {
@@ -66,8 +70,9 @@ void ch14_ex02(void) {
         exit(EXIT_FAILURE);
     }
 
-    for (j = 0; j < i; j++)
+    for (j = 0; j < i; j++) {
         sum += months[j].days;
+    }
     sum += day;
 
     printf("Days since the beginning of the year: %d\n", sum);

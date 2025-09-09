@@ -19,8 +19,9 @@ void ch12_ex06(int argc, char **argv) {
 
     if (argc == 2) {
         while ((ch = (char) getchar()) != EOF) {
-            if (ch == pattern)
+            if (ch == pattern) {
                 count++;
+            }
         }
         printf("The character %c appears %d times in stdin.\n", pattern, count);
     } else {
@@ -30,8 +31,9 @@ void ch12_ex06(int argc, char **argv) {
             }
             count = 0;
             while ((ch = (char) getc(fp)) != EOF) {
-                if (ch == pattern)
+                if (ch == pattern) {
                     count++;
+                }
             }
             fclose(fp);
             printf("The character %c appears %d times in %s.\n", pattern, count, argv[i]);

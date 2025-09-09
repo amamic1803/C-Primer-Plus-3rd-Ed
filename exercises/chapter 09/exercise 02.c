@@ -13,9 +13,11 @@ void ch09_ex02(void) {
 
 static void chline(char ch, int i, int j) {
     int k;
-    for (k = 1; k < i; k++)
+    for (k = 1; k < i; k++) {
         putchar(' ');
-    for (k = i; k <= j; k++)
+    }
+    for (k = i; k <= j; k++) {
         putchar(ch);
+    }
     putchar('\n');
 }

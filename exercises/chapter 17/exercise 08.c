@@ -8,10 +8,11 @@
 static char * s_gets(char * st, int max);
 static char * s_gets(char * st, int max) {
     int i = 0;
-    char ch;
+    char ch = EOF;
 
-    while (i < (max - 1) && (ch = (char) getchar()) != '\n' && ch != EOF)
+    while (i < (max - 1) && (ch = (char) getchar()) != '\n' && ch != EOF) {
         st[i++] = ch;
+    }
 
     st[i] = '\0';
 
@@ -55,6 +56,7 @@ static Node_l *ListContains(Item_l item, const List *list);  // return ptr to it
 static int ListAdd(Item_l item, List *list);  // add item to list, return 1 if successful, 0 otherwise
 static int ListDelete(Item_l item, List *list);  // delete item from list, return 1 if successful, 0 otherwise
 static void TraverseList(const List *list, Item_t item_t, void (*pfun)(Item_t item_t, Item_l item, int count));  // apply pfun to each item in list, passing parent item_t
+static void ClearList(List *list);  // clear all items from list
 
 static void ListInitialize(List *list) {
     list->head = NULL;
@@ -67,9 +69,11 @@ static int ListSize(const List *list) {
 static Node_l *ListContains(Item_l item, const List *list) {
     Node_l *node;
 
-    for (node = list->head; node != NULL; node = node->next)
-        if (strcmp(node->item, item) == 0)
+    for (node = list->head; node != NULL; node = node->next) {
+        if (strcmp(node->item, item) == 0) {
             return node;
+        }
+    }
 
     return NULL;
 }
@@ -81,15 +85,16 @@ static int ListAdd(Item_l item, List *list) {
         return TRUE;
     }
 
-    if ((node = (Node_l *) malloc(sizeof(Node_l))) == NULL)
+    if ((node = (Node_l *) malloc(sizeof(Node_l))) == NULL) {
         return FALSE;
+    }
     strcpy(node->item, item);
     node->count = 1;
     node->prev = NULL;
     node->next = NULL;
-    if (list->head == NULL)
+    if (list->head == NULL) {
         list->head = node;
-    else {
+    } else {
         list->end->next = node;
         node->prev = list->end;
     }
@@ -101,8 +106,9 @@ static int ListAdd(Item_l item, List *list) {
 static int ListDelete(Item_l item, List *list) {
     Node_l *node;
 
-    if ((node = ListContains(item, list)) == NULL)
+    if ((node = ListContains(item, list)) == NULL) {
         return FALSE;
+    }
 
     if (node->count > 1) {
         node->count--;
@@ -111,15 +117,18 @@ static int ListDelete(Item_l item, List *list) {
 
     if (node == list->head) {
         list->head = node->next;
-        if (list->head != NULL)
+        if (list->head != NULL) {
             list->head->prev = NULL;
+        }
     } else {
         node->prev->next = node->next;
-        if (node->next != NULL)
+        if (node->next != NULL) {
             node->next->prev = node->prev;
+        }
     }
-    if (node == list->end)
+    if (node == list->end) {
         list->end = node->prev;
+    }
     free(node);
     list->size--;
 
@@ -128,8 +137,20 @@ static int ListDelete(Item_l item, List *list) {
 static void TraverseList(const List *list, Item_t item_t, void (*pfun)(Item_t item_t, Item_l item, int count)) {
     Node_l *node;
 
-    for (node = list->head; node != NULL; node = node->next)
+    for (node = list->head; node != NULL; node = node->next) {
         (*pfun)(item_t, node->item, node->count);
+    }
+}
+
+static void ClearList(List *list) {
+    Node_l* node;
+    while (list->head != NULL) {
+        node = list->head;
+        list->head = list->head->next;
+        free(node);
+    }
+    list->size = 0;
+    list->end = NULL;
 }
 
 
@@ -141,6 +162,8 @@ static int TreeAdd(Item_t item_t, Item_l item_l, Tree *tree);  // add item to tr
 static int TreeDelete(Item_t item_t, Item_l item_l, Tree *tree);  // delete item from tree, return 1 if successful, 0 otherwise
 static void TraverseTree(const Tree *tree, void (*pfun)(Item_t item_t, Item_l item, int count));  // apply pfun to each item in tree
 static void TraverseTreeInternal(Node_t *node, void (*pfun)(Item_t item_t, Item_l item, int count));  // apply pfun to each item in tree
+static void ClearTree(Tree *tree);
+static void ClearTreeInternal(Node_t *node);
 
 static void InitializeTree(Tree *tree) {
     tree->root = NULL;
@@ -155,11 +178,11 @@ static Node_t **TreeContains(Item_t item, const Tree *tree) {
 
     for (node = (Node_t**) &tree->root; *node != NULL; ) {
         cmp = strcmp(item, (*node)->item);
-        if (cmp < 0)
+        if (cmp < 0) {
             node = &(*node)->left;
-        else if (cmp > 0)
+        } else if (cmp > 0) {
             node = &(*node)->right;
-        else {
+        } else {
             return node;
         }
     }
@@ -175,36 +198,36 @@ static int TreeAdd(Item_t item_t, Item_l item_l, Tree *tree) {
         if (ListAdd(item_l, &node->kinds)) {
             tree->size++;
             return TRUE;
-        } else {
-            return FALSE;
         }
+        return FALSE;
     }
 
-    if ((node = (Node_t *) malloc(sizeof(Node_t))) == NULL)
+    if ((node = (Node_t *) malloc(sizeof(Node_t))) == NULL) {
         return FALSE;
+    }
     strcpy(node->item, item_t);
     ListInitialize(&node->kinds);
     ListAdd(item_l, &node->kinds);
     node->left = NULL;
     node->right = NULL;
 
-    if (tree->root == NULL)
+    if (tree->root == NULL) {
         tree->root = node;
-    else {
+    } else {
         for (temp_node = tree->root; ; ) {
             cmp = strcmp(item_t, temp_node->item);
             if (cmp < 0) {
                 if (temp_node->left == NULL) {
                     temp_node->left = node;
                     break;
-                } else
-                    temp_node = temp_node->left;
+                }
+                temp_node = temp_node->left;
             } else if (cmp > 0) {
                 if (temp_node->right == NULL) {
                     temp_node->right = node;
                     break;
-                } else
-                    temp_node = temp_node->right;
+                }
+                temp_node = temp_node->right;
             } else {
                 free(node);
                 return FALSE;
@@ -221,28 +244,32 @@ static int TreeDelete(Item_t item_t, Item_l item_l, Tree *tree) {
     Node_t *left_node;
     Node_t *right_node;
 
-    if ((node = *(node_addr = TreeContains(item_t, tree))) == NULL)
+    if ((node = *(node_addr = TreeContains(item_t, tree))) == NULL) {
         return FALSE;
+    }
 
     if (ListDelete(item_l, &node->kinds)) {
         if (ListSize(&node->kinds) > 0) {
             tree->size--;
             return TRUE;
         }
-    } else
+    } else {
         return FALSE;
+    }
 
     if (node->left == NULL && node->right == NULL) {
         free(node);
         *node_addr = NULL;
         tree->size--;
         return TRUE;
-    } else if (node->left == NULL) {
+    }
+    if (node->left == NULL) {
         *node_addr = node->right;
         free(node);
         tree->size--;
         return TRUE;
-    } else if (node->right == NULL) {
+    }
+    if (node->right == NULL) {
         *node_addr = node->left;
         free(node);
         tree->size--;
@@ -255,7 +282,7 @@ static int TreeDelete(Item_t item_t, Item_l item_l, Tree *tree) {
     tree->size--;
 
     *node_addr = left_node;
-    for (node = left_node; node->right != NULL; node = node->right);
+    for (node = left_node; node->right != NULL; node = node->right) {}
 
     node->right = right_node;
 
@@ -264,18 +291,40 @@ static int TreeDelete(Item_t item_t, Item_l item_l, Tree *tree) {
 static void TraverseTree(const Tree *tree, void (*pfun)(Item_t item_t, Item_l item, int count)) {
     Node_t *node;
 
-    if ((node = tree->root) == NULL)
+    if ((node = tree->root) == NULL) {
         return;
+    }
+
     TraverseTreeInternal(node, pfun);
 }
 static void TraverseTreeInternal(Node_t *node, void (*pfun)(Item_t item_t, Item_l item, int count)) {
-    if (node->left != NULL)
+    if (node->left != NULL) {
         TraverseTreeInternal(node->left, pfun);
+    }
     TraverseList(&node->kinds, node->item, pfun);
-    if (node->right != NULL)
+    if (node->right != NULL) {
         TraverseTreeInternal(node->right, pfun);
+    }
 }
 
+static void ClearTree(Tree *tree) {
+    if (tree->root != NULL) {
+        ClearTreeInternal(tree->root);
+    }
+    tree->root = NULL;
+    tree->size = 0;
+}
+
+static void ClearTreeInternal(Node_t *node) {
+    ClearList(&node->kinds);
+    if (node->left != NULL) {
+        ClearTreeInternal(node->left);
+    }
+    if (node->right != NULL) {
+        ClearTreeInternal(node->right);
+    }
+    free(node);
+}
 
 // core logic
 static char menu(void);
@@ -285,7 +334,6 @@ static void showpets(const Tree *pt);
 static void findpet(const Tree *pt);
 static void printitem(Item_t item_t, Item_l item_l, int count);
 static void uppercase(char *str);
-
 
 void ch17_ex08(void) {
     Tree pets;
@@ -319,6 +367,8 @@ void ch17_ex08(void) {
         }
     }
     puts("Bye.");
+
+    ClearTree(&pets);
 }
 
 
@@ -332,15 +382,17 @@ static char menu(void) {
     puts("d) delete a pet       q) quit");
     puts("Enter your choice:");
     while ((ch = getchar()) != EOF) {
-        while (getchar() != '\n');
+        while (getchar() != '\n') {}
         ch = tolower(ch);
-        if (strchr("alrfndq", ch) == NULL)
+        if (strchr("alrfndq", ch) == NULL) {
             puts("Please enter an a, l, f, n, d, or q:");
-        else
+        } else {
             break;
+        }
     }
-    if (ch == EOF)
+    if (ch == EOF) {
         ch = 'q';
+    }
 
     putchar('\n');
 
@@ -358,8 +410,9 @@ static void addpet(Tree *pt) {
     uppercase(item_t);
     uppercase(item_l);
 
-    if (!TreeAdd(item_t, item_l, pt))
+    if (!TreeAdd(item_t, item_l, pt)) {
         printf("Couldn't add %s (%s) to club\n", item_t, item_l);
+    }
 }
 static void droppet(Tree *pt) {
     Item_t item_t;
@@ -373,14 +426,16 @@ static void droppet(Tree *pt) {
     uppercase(item_t);
     uppercase(item_l);
 
-    if (!TreeDelete(item_t, item_l, pt))
+    if (!TreeDelete(item_t, item_l, pt)) {
         printf("Couldn't delete %s (%s) from club\n", item_t, item_l);
+    }
 }
 static void showpets(const Tree *pt) {
-    if (pt->root == NULL)
+    if (pt->root == NULL) {
         puts("No entries!");
-    else
+    } else {
         TraverseTree(pt, printitem);
+    }
 }
 static void findpet(const Tree *pt) {
     Item_t item_t;
@@ -395,20 +450,22 @@ static void findpet(const Tree *pt) {
     uppercase(item_t);
     uppercase(item_l);
 
-    if ((node = *TreeContains(item_t, pt)) == NULL)
+    if ((node = *TreeContains(item_t, pt)) == NULL) {
         printf("%s the %s is not a member.\n", item_t, item_l);
-    else {
-        if (ListContains(item_l, &node->kinds) != NULL)
+    } else {
+        if (ListContains(item_l, &node->kinds) != NULL) {
             printf("%s the %s is a member.\n", node->item, item_l);
-        else
+        } else {
             printf("%s the %s is not a member.\n", node->item, item_l);
+        }
     }
 }
 static void printitem(Item_t item_t, Item_l item_l, int count) {
     int i;
 
-    for (i = 0; i < count; i++)
+    for (i = 0; i < count; i++) {
         printf("Pet: %-19s  Kind: %-19s\n", item_t, item_l);
+    }
 }
 static void uppercase(char *str) {
     while (*str != '\0') {

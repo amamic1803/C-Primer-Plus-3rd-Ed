@@ -2,7 +2,8 @@
 
 
 void ch06_ex05(void) {
-    int low_lim, high_lim;
+    int low_lim;
+    int high_lim;
     int i;
 
     printf("Enter lower and upper integer limits:\n");

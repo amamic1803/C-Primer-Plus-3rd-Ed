@@ -9,6 +9,8 @@ void ch16_ex07(void) {
     int arr[SAMPLE_SIZE];
     int i;
 
+    srand(time(NULL));
+
     for (i = 0; i < SAMPLE_SIZE; i++) {
         arr[i] = i;
     }
@@ -19,36 +21,26 @@ void ch16_ex07(void) {
 
 static void print_rand(int *arr, int size, int picks) {
     int *picked;
-    int i, j, l;
-    int made_picks = 0;
+    int i;
+    int curr_size = size;
 
     if (picks > size) {
         fprintf(stderr, "Error: picks > size\n");
         exit(EXIT_FAILURE);
     }
 
-    srand(time(NULL));
     if ((picked = (int *) malloc(size * sizeof(int))) == NULL) {
         fprintf(stderr, "Error: allocation failed\n");
         exit(EXIT_FAILURE);
     }
     for (i = 0; i < size; i++) {
-        picked[i] = 0;
+        picked[i] = arr[i];
     }
 
-    while (made_picks < picks) {
-        i = rand() % (size - made_picks);
-        j = 0;
-        l = -1;
-        while (l < i) {
-            if (picked[j] == 0)
-                l++;
-            if (l != i)
-                j++;
-        }
-        picked[j] = 1;
-        made_picks++;
-        printf("%d ", arr[j]);
+    while (size - curr_size < picks) {
+        i = rand() % curr_size;
+        printf("%d ", arr[i]);
+        picked[i] = picked[--curr_size];
     }
 
     free(picked);

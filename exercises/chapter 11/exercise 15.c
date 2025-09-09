@@ -5,7 +5,9 @@ static void find_args(int argc, char **argv, int *p, int *u, int *l);
 
 
 void ch11_ex15(int argc, char **argv) {
-    int p = 0, u = 0, l = 0;
+    int p = 0;
+    int u = 0;
+    int l = 0;
     char ch;
 
     find_args(argc, argv, &p, &u, &l);

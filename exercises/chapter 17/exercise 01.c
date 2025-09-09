@@ -13,7 +13,8 @@ static char * s_gets(char * st, int max);
 
 void ch17_ex01(void) {
     struct film * head = NULL;
-    struct film * prev, * current;
+    struct film * prev = NULL;
+    struct film * current = NULL;
     char input[TSIZE];
 
     puts("Enter first movie title:");
@@ -30,13 +31,13 @@ void ch17_ex01(void) {
         strcpy(current->title, input);
         puts("Enter your rating <0-10>:");
         scanf("%d", &current->rating);
-        while (getchar() != '\n');
+        while (getchar() != '\n') {}
         puts("Enter next movie title (empty line to stop):");
         prev = current;
     }
-    if (head == NULL)
+    if (head == NULL) {
         printf("No data entered.");
-    else {
+    } else {
         printf("Here is the movie list:\n");
         prev = NULL;
         current = head;
@@ -56,15 +57,16 @@ void ch17_ex01(void) {
 
 static char * s_gets(char * st, int max) {
     int i = 0;
-    char ch;
+    char ch = EOF;
 
-    while (i < (max - 1) && (ch = (char) getchar()) != '\n' && ch != EOF)
+    while (i < (max - 1) && (ch = (char) getchar()) != '\n' && ch != EOF) {
         st[i++] = ch;
+    }
 
     st[i] = '\0';
 
-    if (ch != EOF)
+    if (ch != EOF) {
         return st;
-    else
-        return NULL;
+    }
+    return NULL;
 }

@@ -1,0 +1,86 @@
+name: Test and Lint
+
+on: [push, pull_request, workflow_dispatch]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test-and-lint:
+    name: Test and Lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install C/C++
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential clang
+
+      - name: Install C/C++ tools
+        run: |
+          sudo apt update
+          sudo apt install -y cmake ninja-build clang-tidy
+
+      - name: Print tools versions
+        run: |
+          echo "GCC version:"
+          gcc --version
+          echo
+          
+          echo "G++ version:"
+          g++ --version
+          echo
+          
+          echo "Clang version:"
+          clang --version
+          echo
+          
+          echo "Clang++ version:"
+          clang++ --version
+          echo
+          
+          echo "CMake version:"
+          cmake --version
+          echo
+          
+          echo "Ninja version:"
+          ninja --version
+          echo
+          
+          echo "Clang-Tidy version:"
+          clang-tidy --version
+          echo
+          
+      - name: Build with GCC
+        run: |
+          cmake \
+          -DCMAKE_C_COMPILER=gcc \
+          -DCMAKE_CXX_COMPILER=g++ \
+          -DCMAKE_BUILD_TYPE=Release \
+          -G Ninja \
+          -S . \
+          -B cmake-build-release-gcc
+          
+          cd cmake-build-release-gcc
+          
+          cmake --build .
+
+      - name: Build with Clang
+        run: |
+          cmake \
+          -DCMAKE_C_COMPILER=clang \
+          -DCMAKE_CXX_COMPILER=clang++ \
+          -DCMAKE_BUILD_TYPE=Release \
+          -G Ninja \
+          -S . \
+          -B cmake-build-release-clang
+          
+          cd cmake-build-release-clang
+          
+          cmake --build .

@@ -5,7 +5,11 @@
 void ch11_ex11(void) {
     char ch;
     int word_flag = 0;
-    int words = 0, uppercase = 0, lowercase = 0, punctuation = 0, digits = 0;
+    int words = 0;
+    int uppercase = 0;
+    int lowercase = 0;
+    int punctuation = 0;
+    int digits = 0;
 
     puts("Enter text to analyze (EOF to terminate):");
 

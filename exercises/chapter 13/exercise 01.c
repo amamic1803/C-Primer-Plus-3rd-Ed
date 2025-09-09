@@ -16,7 +16,8 @@ void ch13_ex01(void) {
 }
 
 static int getarray(int array[], int limit) {
-    int num, status;
+    int num;
+    int status;
     int index = 0;
     char ch;
 

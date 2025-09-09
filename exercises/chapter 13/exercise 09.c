@@ -36,24 +36,28 @@ static int get_num(unsigned long long int *num) {
         } else {
             if (num_flag) {
                 num_str[i] = '\0';
-                *num = (unsigned long long int) strtoull(num_str, NULL, 10);
+                *num = strtoull(num_str, NULL, 10);
                 ungetc(ch, stdin);
             }
             if (ch == EOF) {
                 eof_found = 1;
             }
-            if (num_flag || eof_found)
+            if (num_flag || eof_found) {
                 break;
+            }
         }
     }
 
-    if (!num_flag)
+    if (!num_flag) {
         error_found = 1;
+    }
 
-    if (eof_found)
+    if (eof_found) {
         return EOF;
-    else if (error_found)
+    }
+    if (error_found) {
         return 0;
-    else
-        return 1;
+    }
+
+    return 1;
 }

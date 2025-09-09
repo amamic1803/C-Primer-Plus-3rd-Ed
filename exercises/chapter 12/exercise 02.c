@@ -28,7 +28,8 @@ void ch12_ex02(int argc, char **argv) {
 static void print_file(FILE *fp) {
     int ch;
 
-    while ((ch = getc(fp)) != EOF)
+    while ((ch = getc(fp)) != EOF) {
         putchar(ch);
+    }
     putchar('\n');
 }

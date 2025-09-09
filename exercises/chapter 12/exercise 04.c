@@ -4,7 +4,8 @@
 
 
 void ch12_ex04(void) {
-    FILE *in, *out;
+    FILE *in;
+    FILE *out;
     int ch;
     char name[45];
     int count = 0;

@@ -32,4 +32,4 @@ _Certified Course in Visual Basic 4_.
 
 **EBook (PDF):**
 
-[The Waite Group's C primer plus by Stephen Prata (Internet Archive)](https://archive.org/details/waitegroupscprim00prat)
+[The Waite Group's C Primer Plus, Third Edition by Stephen Prata (Internet Archive)](https://archive.org/details/waitegroupscprim00prat)

@@ -1,3 +1,6 @@
+#ifndef INFO09_H
+#define INFO09_H
+
 #define EXERCISES_CH09 9
 
 void ch09_ex01(void);
@@ -9,3 +12,5 @@ void ch09_ex06(void);
 void ch09_ex07(void);
 void ch09_ex08(void);
 void ch09_ex09(void);
+
+#endif // INFO09_H

@@ -5,7 +5,8 @@
 
 
 void ch12_ex05(int argc, char **argv) {
-    FILE *fp1, *fp2;
+    FILE *fp1;
+    FILE *fp2;
     char line[MAX_LINE_LENGTH + 1];
     int changes = 1;
     int line_len;
@@ -57,8 +58,9 @@ void ch12_ex05(int argc, char **argv) {
         changes = 0;
 
         if (fgets(line, MAX_LINE_LENGTH, fp1) != NULL) {
-            if ((newline_pos = strchr(line, '\n')) != NULL)
+            if ((newline_pos = strchr(line, '\n')) != NULL) {
                 *newline_pos = '\0';
+            }
             fputs(line, stdout);
             changes = 1;
         }
@@ -77,8 +79,9 @@ void ch12_ex05(int argc, char **argv) {
         if (changes) {
             printf("   |   ");
             fputs(line, stdout);
-            if (second_null)
+            if (second_null) {
                 putchar('\n');
+            }
         }
     }
 

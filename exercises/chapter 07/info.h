@@ -1,3 +1,6 @@
+#ifndef INFO07_H
+#define INFO07_H
+
 #define EXERCISES_CH07 10
 
 void ch07_ex01(void);
@@ -10,3 +13,5 @@ void ch07_ex07(void);
 void ch07_ex08(void);
 void ch07_ex09(void);
 void ch07_ex10(void);
+
+#endif // INFO07_H

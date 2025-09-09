@@ -25,8 +25,9 @@ void ch14_ex10(void) {
         printf("Enter your choice:\n");
 
         choice = (char) tolower(getchar());
-        if (choice != '\n')
-            while (getchar() != '\n');
+        if (choice != '\n') {
+            while (getchar() != '\n') {}
+        }
         putchar('\n');
 
         switch (choice) {
@@ -48,7 +49,7 @@ void ch14_ex10(void) {
             case 'f':
                 printf("Enter new limit:\n");
                 scanf("%llu", &limit);
-                while (getchar() != '\n');
+                while (getchar() != '\n') {}
                 break;
             case 'q':
                 goto out;
@@ -84,29 +85,35 @@ static void cubes(long long unsigned int n) {
 }
 
 static void primes(long long unsigned int n) {
-    long long unsigned int i, j;
+    long long unsigned int i;
+    long long unsigned int j;
     int prime;
 
     printf("PRIMES:\n");
     for (i = 2; i <= n; i++) {
         prime = 1;
-        for (j = 2; j <= (long long unsigned int) floorl(sqrtl((long double) i)); j++)
+        for (j = 2; j <= (long long unsigned int) floorl(sqrtl((long double) i)); j++) {
             if (i % j == 0) {
                 prime = 0;
                 break;
             }
-        if (prime)
+        }
+        if (prime) {
             printf("%llu\n", i);
+        }
     }
 }
 
 static void fibonacci(long long unsigned int n) {
-    long long unsigned int num1 = 0, num2 = 1, temp;
+    long long unsigned int num1 = 0;
+    long long unsigned int num2 = 1;
+    long long unsigned int temp;
 
     printf("FIBONACCI:\n");
     printf("%llu\n", num1);
-    if (n > 0)
+    if (n > 0) {
         printf("%llu\n", num2);
+    }
 
     while ((temp = num1 + num2) <= n) {
         printf("%llu\n", temp);
@@ -116,16 +123,20 @@ static void fibonacci(long long unsigned int n) {
 }
 
 static void perfect(long long unsigned int n) {
-    long long unsigned int i, j;
+    long long unsigned int i;
+    long long unsigned int j;
     long long unsigned int sum_divisors;
 
     printf("PERFECT:\n");
 
     for (i = 1; i <= n; i++) {
-        for (j = 1, sum_divisors = 0; j <= i / 2; j++)
-            if (i % j == 0)
+        for (j = 1, sum_divisors = 0; j <= i / 2; j++) {
+            if (i % j == 0) {
                 sum_divisors += j;
-        if (sum_divisors == i)
+            }
+        }
+        if (sum_divisors == i) {
             printf("%llu\n", i);
+        }
     }
 }

@@ -2,8 +2,10 @@
 
 
 void ch07_ex05(void) {
-    int even_ints = 0, odd_ints = 0;
-    double even_avg = 0, odd_avg = 0;
+    int even_ints = 0;
+    int odd_ints = 0;
+    double even_avg = 0;
+    double odd_avg = 0;
     int input;
 
     printf("Enter integers (0 stops entering):\n");
@@ -20,6 +22,7 @@ void ch07_ex05(void) {
                 odd_avg += input;
                 break;
             }
+            default: break;
         }
         scanf("%d", &input);
     }

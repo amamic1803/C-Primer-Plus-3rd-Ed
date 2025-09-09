@@ -1,3 +1,6 @@
+#ifndef INFO06_H
+#define INFO06_H
+
 #define EXERCISES_CH06 14
 
 void ch06_ex01(void);
@@ -14,3 +17,5 @@ void ch06_ex11(void);
 void ch06_ex12(void);
 void ch06_ex13(void);
 void ch06_ex14(void);
+
+#endif // INFO06_H

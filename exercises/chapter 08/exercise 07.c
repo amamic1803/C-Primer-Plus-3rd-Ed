@@ -22,7 +22,7 @@ void ch08_ex07(void) {
                "E) quit\n"
                "*****************************************************************\n");
         input = (char) toupper(getchar());
-        while ((char) getchar() != '\n');
+        while ((char) getchar() != '\n') {}
         switch(input) {
             case 'A' : {
                 pay_rate = 8.75;
@@ -51,13 +51,13 @@ void ch08_ex07(void) {
 
         printf("Enter work hours:\n");
         scanf("%d", &worked_hours);
-        while ((char) getchar() != '\n');
+        while ((char) getchar() != '\n') {}
 
 
         if (worked_hours > 40) {
-            gross_pay = (double) (40 * pay_rate) + (double) (worked_hours - 40) * 1.5 * pay_rate;
+            gross_pay = 40 * pay_rate + (double) (worked_hours - 40) * 1.5 * pay_rate;
         } else {
-            gross_pay = (double) (worked_hours * pay_rate);
+            gross_pay = worked_hours * pay_rate;
         }
 
         if (gross_pay <= 300) {

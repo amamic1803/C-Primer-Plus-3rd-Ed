@@ -12,20 +12,23 @@ void ch12_ex11(void) {
     char output_filename[MAX_FILENAME];
     int input_ints[ROWS][COLS];
     char input_chars[ROWS][COLS + 1];
-    int i, j;
+    int i;
+    int j;
     FILE *fp;
 
     printf("Enter the name of the file to be processed: ");
     fflush(stdout);
     fgets(filename, MAX_FILENAME, stdin);
-    if (filename[strlen(filename) - 1] == '\n')
+    if (filename[strlen(filename) - 1] == '\n') {
         filename[strlen(filename) - 1] = '\0';
+    }
 
     printf("Enter the name of the output file: ");
     fflush(stdout);
     fgets(output_filename, MAX_FILENAME, stdin);
-    if (output_filename[strlen(output_filename) - 1] == '\n')
+    if (output_filename[strlen(output_filename) - 1] == '\n') {
         output_filename[strlen(output_filename) - 1] = '\0';
+    }
 
     if ((fp = fopen(filename, "r")) == NULL) {
         fprintf(stderr, "Can't open %s file.\n", filename);

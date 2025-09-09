@@ -25,7 +25,6 @@ static int process_character(char ch) {
     char_id = tolower(ch);
     if (isalpha(ch)) {
         return char_id - 'a' + 1;
-    } else {
-        return -1;
     }
+    return -1;
 }

@@ -17,10 +17,9 @@ static double power(double a, int b) {
 
     if (a == 0.0) {
         return a;
-    } else {
-        for (i = 0; i < abs(b); i++) {
-            result *= a;
-        }
-        return b > 0 ? result : 1 / result;
     }
+    for (i = 0; i < abs(b); i++) {
+        result *= a;
+    }
+    return b > 0 ? result : 1 / result;
 }

@@ -26,22 +26,26 @@ void ch14_ex03(void) {
         gets_custom(libry[count].author, MAXAUTL);
         printf("Now enter the value.\n");
         scanf("%f", &libry[count++].value);
-        while (getchar() != '\n');
-        if (count < MAXBKS)
+        while (getchar() != '\n') {}
+        if (count < MAXBKS) {
             printf("Enter the next title.\n");
+        }
     }
 
-    for (index = 0; index < count; index++)
+    for (index = 0; index < count; index++) {
         libry_ptrs[index] = &libry[index];
+    }
 
     sort_by_title(libry_ptrs, count);
 
-    for (index = 0; index < count; index++)
+    for (index = 0; index < count; index++) {
         total += libry_ptrs[index]->value;
+    }
 
     printf("Here is the list of your books:\n");
-    for (index = 0; index < count; index++)
+    for (index = 0; index < count; index++) {
         printf("%s by %s: $%.2f\n", (*libry_ptrs[index]).title, (*libry_ptrs[index]).author, (*libry_ptrs[index]).value);
+    }
     printf("\nThe total value of your books is $%.2f.\n", total);
 }
 
@@ -56,21 +60,25 @@ static char * gets_custom(char *s, int max_len) {
     }
     *s = '\0';
 
-    if (initial == s && c != '\n')
+    if (initial == s && c != '\n') {
         return NULL;
-    else
-        return initial;
+
+    }
+    return initial;
 }
 
 static void sort_by_title(struct book **libry_ptrs, int count) {
-    int i, j;
+    int i;
+    int j;
     struct book *temp;
 
-    for (i = 0; i < count - 1; i++)
-        for (j = i + 1; j < count; j++)
+    for (i = 0; i < count - 1; i++) {
+        for (j = i + 1; j < count; j++) {
             if (strcmp(libry_ptrs[i]->title, (*libry_ptrs[j]).title) > 0) {
                 temp = libry_ptrs[i];
                 libry_ptrs[i] = libry_ptrs[j];
                 libry_ptrs[j] = temp;
             }
+        }
+    }
 }

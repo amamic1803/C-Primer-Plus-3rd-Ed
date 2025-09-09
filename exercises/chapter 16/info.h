@@ -1,3 +1,6 @@
+#ifndef INFO16_H
+#define INFO16_H
+
 #define EXERCISES_CH16 8
 
 void ch16_ex01(void);
@@ -8,3 +11,5 @@ void ch16_ex05(void);
 void ch16_ex06(void);
 void ch16_ex07(void);
 void ch16_ex08(void);
+
+#endif // INFO16_H

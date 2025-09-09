@@ -32,13 +32,14 @@ void ch14_ex06(void) {
         players[i].hits = 0;
         players[i].walks = 0;
         players[i].RBI = 0;
-        players[i].batting_average = 0.0f;
+        players[i].batting_average = 0.0F;
     }
 
     printf("Enter the name of the file to be read:\n");
     fgets(filename, 40, stdin);
-    if (filename[strlen(filename) - 1] == '\n')
+    if (filename[strlen(filename) - 1] == '\n') {
         filename[strlen(filename) - 1] = '\0';
+    }
     putchar('\n');
 
     if ((fp = fopen(filename, "r")) == NULL) {
@@ -99,10 +100,11 @@ static void show_player_data(struct player *players) {
     int i;
 
     for (i = 0; i < NUM_PLAYERS; i++) {
-        if (players[i].first_name[0] != '\0')
+        if (players[i].first_name[0] != '\0') {
             printf("PLAYER %02d:\nFirst name: %s\nLast name: %s\nAt bat: %d\nHits: %d\nWalks: %d\nRBI: %d\nBatting average %.3f\n\n",
                    i, players[i].first_name, players[i].last_name, players[i].at_bats, players[i].hits,
                    players[i].walks, players[i].RBI, players[i].batting_average);
+        }
     }
 }
 

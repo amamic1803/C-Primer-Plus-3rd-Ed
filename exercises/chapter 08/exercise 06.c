@@ -11,8 +11,8 @@ void ch08_ex06(void) {
 static int getfirst(void) {
     int ch;
 
-    while (isspace(ch = getchar()));
-    while (getchar() != '\n');
+    while (isspace(ch = getchar())) {}
+    while (getchar() != '\n') {}
 
     return ch;
 }

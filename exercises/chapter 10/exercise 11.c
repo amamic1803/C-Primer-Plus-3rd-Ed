@@ -22,59 +22,70 @@ void ch10_ex11(void) {
 }
 
 static void store_data(double (*ptr)[COLS], int rows) {
-    int i, j;
+    int i;
+    int j;
 
     for (i = 1; i <= rows; i++) {
         printf("Enter %d numbers for set %d:\n", COLS, i);
-        for (j = 0; j < COLS; j++)
+        for (j = 0; j < COLS; j++) {
             scanf("%lf", *(ptr + i - 1) + j);
+        }
     }
 }
 
 static void average_sets(const double (*ptr)[COLS], double *save, int rows) {
-    int i, j;
+    int i;
+    int j;
     double sum;
 
     for (i = 0; i <= rows; i++) {
         sum = 0;
-        for (j = 0; j < COLS; j++)
+        for (j = 0; j < COLS; j++) {
             sum += *(*(ptr + i) + j);
+        }
         *(save + i) = sum / COLS;
     }
 }
 
 static double average_all(const double (*ptr)[COLS], int rows) {
-    int i, j;
+    int i;
+    int j;
     double sum = 0;
 
     for (i = 0; i < rows; i++) {
-        for (j = 0; j < COLS; j++)
+        for (j = 0; j < COLS; j++) {
             sum += *(*(ptr + i) + j);
+        }
     }
     return sum / (rows * COLS);
 }
 
 static double largest_all(const double (*ptr)[COLS], int rows) {
-    int i, j;
+    int i;
+    int j;
     double largest;
 
     largest = *(*(ptr + 0) + 0);
     for (i = 0; i <= rows; i++) {
-        for (j = 0; j < COLS; j++)
-            if (*(*(ptr + i) + j) > largest)
+        for (j = 0; j < COLS; j++) {
+            if (*(*(ptr + i) + j) > largest) {
                 largest = *(*(ptr + i) + j);
+            }
+        }
     }
 
     return largest;
 }
 
 static void report_results(const double (*ptr)[COLS], int rows, const double *average_sets_val, double average_all_val, double largest_all_val) {
-    int i, j;
+    int i;
+    int j;
 
     printf("\nEntered data:\n");
     for (i = 0; i < rows; i++) {
-        for (j = 0; j < COLS; j++)
+        for (j = 0; j < COLS; j++) {
             printf("%5.1f ", ptr[i][j]);
+        }
         putchar('\n');
     }
 

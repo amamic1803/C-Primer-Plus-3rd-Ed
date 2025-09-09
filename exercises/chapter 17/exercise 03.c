@@ -1,6 +1,6 @@
+#include "header 03.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "header 03.h"
 static void showmoview(Item item);
 static char * s_gets(char * st, int max);
 
@@ -18,7 +18,7 @@ void ch17_ex03(void) {
     while (s_gets(temp.title, TSIZE) != NULL && temp.title[0] != '\0') {
         puts("Enter your rating <0-10>:");
         scanf("%d", &temp.rating);
-        while (getchar() != '\n');
+        while (getchar() != '\n') {}
         if (!AddItem(temp, &movies)) {
             fprintf(stderr, "Problem allocating memory\n");
             break;
@@ -29,9 +29,9 @@ void ch17_ex03(void) {
         }
         puts("Enter next movie title (empty line to stop):");
     }
-    if (EmptyList(&movies))
+    if (EmptyList(&movies)) {
         printf("No data entered. ");
-    else {
+    } else {
         printf("Here is the movie list:\n");
         Traverse(&movies, showmoview);
     }
@@ -44,17 +44,19 @@ static void showmoview(Item item) {
 
 static char * s_gets(char * st, int max) {
     int i = 0;
-    char ch;
+    char ch = EOF;
 
-    while (i < (max - 1) && (ch = (char) getchar()) != '\n' && ch != EOF)
+    while (i < (max - 1) && (ch = (char) getchar()) != '\n' && ch != EOF) {
         st[i++] = ch;
+    }
 
     st[i] = '\0';
 
-    if (ch != EOF)
+    if (ch != EOF) {
         return st;
-    else
-        return NULL;
+    }
+
+    return NULL;
 }
 
 
@@ -80,15 +82,15 @@ static unsigned int ListItems(const List *plist) {
 static BOOLEAN AddItem(Item item, List *plist) {
     if (plist->items == MAXSIZE) {
         return False;
-    } else {
-        plist->entries[plist->items++] = item;
-        return True;
     }
+    plist->entries[plist->items++] = item;
+    return True;
 }
 
 static void Traverse(List *plist, void (* pfun)(Item item)) {
     int i;
 
-    for (i = 0; i < plist->items; i++)
+    for (i = 0; i < plist->items; i++) {
         (*pfun)(plist->entries[i]);
+    }
 }

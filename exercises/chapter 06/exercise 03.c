@@ -2,7 +2,8 @@
 
 
 void ch06_ex03(void) {
-    int i, j;
+    int i;
+    int j;
     char start_char = 'F';
 
     for (i = 1; i <= 6; i++) {

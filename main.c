@@ -1,7 +1,7 @@
+#include "exercises.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "exercises.h"
 static const char *get_filename(const char *full_filename);
 static void help(const char *filename);
 static void list(int chapters, const int *metadata);
@@ -12,8 +12,10 @@ int main(int argc, char *argv[]) {
     const int METADATA[] = EXERCISES;
     int chapters;
     const char *filename;
-    int chapter_num, exercise_num;
-    int help_flag = 0, list_flag = 0;
+    int chapter_num;
+    int exercise_num;
+    int help_flag = 0;
+    int list_flag = 0;
     int i;
 
     puts("******************************************************");
@@ -40,7 +42,8 @@ int main(int argc, char *argv[]) {
     if (help_flag) {
         help(filename);
         return 0;
-    } else if (list_flag) {
+    }
+    if (list_flag) {
         list(chapters, METADATA);
         return 0;
     }
@@ -104,7 +107,8 @@ static void help(const char *filename) {
 }
 
 static void list(int chapters, const int *metadata) {
-    int i, j;
+    int i;
+    int j;
     putchar('\n');
     for (i = 0; i < chapters; i++) {
         printf("Chapter %02d\n", i + 1);

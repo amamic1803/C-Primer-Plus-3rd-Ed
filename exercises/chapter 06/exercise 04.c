@@ -4,7 +4,8 @@
 void ch06_ex04(void) {
     char start_char;
     const char alphabet_start = 'A';
-    int i, j;
+    int i;
+    int j;
     int height;
 
     printf("Enter a capital letter:\n");

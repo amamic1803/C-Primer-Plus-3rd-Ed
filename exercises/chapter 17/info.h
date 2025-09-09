@@ -1,3 +1,6 @@
+#ifndef INFO17_H
+#define INFO17_H
+
 #define EXERCISES_CH17 8
 
 void ch17_ex01(void);
@@ -8,3 +11,5 @@ void ch17_ex05(void);
 void ch17_ex06(void);
 void ch17_ex07(void);
 void ch17_ex08(void);
+
+#endif // INFO17_H

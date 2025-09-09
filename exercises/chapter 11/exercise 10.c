@@ -150,7 +150,8 @@ static int get_first_word_len(char *string) {
 }
 
 static void sort_by_ascii(char **strings, int entered) {
-    int i, j;
+    int i;
+    int j;
     char *temp;
     for (i = 0; i < entered - 1; i++) {
         for (j = i + 1; j < entered; j++) {
@@ -164,7 +165,8 @@ static void sort_by_ascii(char **strings, int entered) {
 }
 
 static void sort_by_length(char **strings, int entered) {
-    int i, j;
+    int i;
+    int j;
     char *temp;
     for (i = 0; i < entered - 1; i++) {
         for (j = i + 1; j < entered; j++) {
@@ -179,7 +181,8 @@ static void sort_by_length(char **strings, int entered) {
 
 static void sort_by_first_word_length(char **strings, int entered) {
     int word_lens[MAX_STR_NUM];
-    int i, j;
+    int i;
+    int j;
     int temp_int;
     char *temp_ch;
 

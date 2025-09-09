@@ -13,7 +13,7 @@ void ch08_ex05(void) {
     while (1) {
         printf("Uh...is your number %d?\n", guess);
         ch = (char) getchar();
-        while ((char) getchar() != '\n');
+        while ((char) getchar() != '\n') {}
         switch(ch) {
             case 'h' : {
                 guess += (int) round(move);

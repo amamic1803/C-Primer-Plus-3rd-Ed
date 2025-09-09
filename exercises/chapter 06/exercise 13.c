@@ -3,7 +3,8 @@
 
 void ch06_ex13(void) {
     const int original_investment = 100;
-    double daphne, deirdre;
+    double daphne;
+    double deirdre;
     int i;
 
     daphne = 1.1 * (double) original_investment;

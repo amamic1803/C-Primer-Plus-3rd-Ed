@@ -14,8 +14,9 @@ void ch12_ex10(void) {
     fflush(stdout);
     fgets(filename, MAX_FILENAME_LENGTH, stdin);
     i = (int) strlen(filename) - 1;
-    if (filename[i] == '\n')
+    if (filename[i] == '\n') {
         filename[i] = '\0';
+    }
 
     if ((fp = fopen(filename, "r")) == NULL) {
         printf("Can't open %s\n", filename);

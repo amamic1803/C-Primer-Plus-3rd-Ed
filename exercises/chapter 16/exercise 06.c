@@ -12,5 +12,5 @@ void ch16_ex06(void) {
 
 static void sleep(double seconds) {
     clock_t start = clock();
-    while (((double) (clock() - start) / (double) CLOCKS_PER_SEC) < seconds);
+    while (((double) (clock() - start) / (double) CLOCKS_PER_SEC) < seconds) {}
 }

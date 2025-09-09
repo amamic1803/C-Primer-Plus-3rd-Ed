@@ -2,8 +2,10 @@
 
 
 void ch07_ex03(void) {
-    int even_ints = 0, odd_ints = 0;
-    double even_avg = 0, odd_avg = 0;
+    int even_ints = 0;
+    int odd_ints = 0;
+    double even_avg = 0;
+    double odd_avg = 0;
     int input;
 
     printf("Enter integers (0 stops entering):\n");

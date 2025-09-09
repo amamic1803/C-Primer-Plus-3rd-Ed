@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-static int get_days(char *month);
+static int get_days(const char *month);
 struct month_info {
     char name[10];
     char abbrev[4];
     int days;
     int month_num;
 };
-static struct month_info months[12] = {
+static const struct month_info months[12] = {
     {"January", "Jan", 31, 1},
     {"February", "Feb", 28, 2},
     {"March", "Mar", 31, 3},
@@ -33,8 +33,9 @@ void ch14_ex01(void) {
     }
 }
 
-static int get_days(char *month) {
-    int i, j;
+static int get_days(const char *month) {
+    int i;
+    int j;
     char input_abbrev[4];
     char working_abbrev[4];
     int sum = 0;

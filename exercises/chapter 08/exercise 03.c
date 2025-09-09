@@ -3,7 +3,8 @@
 
 void ch08_ex03(void) {
     char ch;
-    int count_low = 0, count_high = 0;
+    int count_low = 0;
+    int count_high = 0;
 
     printf("Enter text (EOF to quit):\n");
 

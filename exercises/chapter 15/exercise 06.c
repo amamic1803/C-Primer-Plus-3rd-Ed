@@ -5,15 +5,15 @@
 #define SOLID 0
 #define DOTTED 1
 #define DASHED 2
-#define BLUE 4
-#define GREEN 2
-#define RED 1
+#define BLUE 4U
+#define GREEN 2U
+#define RED 1U
 #define BLACK 0
 #define YELLOW (RED | GREEN)
 #define MAGENTA (RED | BLUE)
 #define CYAN (GREEN | BLUE)
 #define WHITE (RED | GREEN | BLUE)
-const char *colors[8] = {"black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"};
+const char *const colors[8] = {"black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"};
 static void set_property(unsigned int *box, unsigned int property, unsigned int value);
 static unsigned int get_property(const unsigned int *box, unsigned int property);
 
@@ -84,31 +84,31 @@ static void set_property(unsigned int *box, unsigned int property, unsigned int 
 
     switch (property) {
         case 0: {
-            *box &= ~0b1;
+            *box &= ~0b1U;
             *box |= value;
             break;
         }
         case 1: {
-            value <<= 1;
-            *box &= ~0b1110;
+            value <<= 1U;
+            *box &= ~0b1110U;
             *box |= value;
             break;
         }
         case 2: {
-            value <<= 4;
-            *box &= ~0b10000;
+            value <<= 4U;
+            *box &= ~0b10000U;
             *box |= value;
             break;
         }
         case 3: {
-            value <<= 5;
-            *box &= ~0b11100000;
+            value <<= 5U;
+            *box &= ~0b11100000U;
             *box |= value;
             break;
         }
         case 4: {
-            value <<= 8;
-            *box &= ~0b1100000000;
+            value <<= 8U;
+            *box &= ~0b1100000000U;
             *box |= value;
             break;
         }
@@ -136,23 +136,23 @@ static unsigned int get_property(const unsigned int *box, unsigned int property)
 
     switch (property) {
         case 0: {
-            result = *box & 0b1;
+            result = *box & 0b1U;
             break;
         }
         case 1: {
-            result = (*box & 0b1110) >> 1;
+            result = (*box & 0b1110U) >> 1U;
             break;
         }
         case 2: {
-            result = (*box & 0b10000) >> 4;
+            result = (*box & 0b10000U) >> 4U;
             break;
         }
         case 3: {
-            result = (*box & 0b11100000) >> 5;
+            result = (*box & 0b11100000U) >> 5U;
             break;
         }
         case 4: {
-            result = (*box & 0b1100000000) >> 8;
+            result = (*box & 0b1100000000U) >> 8U;
             break;
         }
         default: {

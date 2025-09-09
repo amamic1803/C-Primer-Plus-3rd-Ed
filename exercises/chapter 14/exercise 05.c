@@ -63,7 +63,8 @@ static void print_student_data(const struct student *student, int count) {
 }
 
 static void print_class_average(struct student *student, int count) {
-    int i, j;
+    int i;
+    int j;
     float average;
 
     printf("Class average:\n");

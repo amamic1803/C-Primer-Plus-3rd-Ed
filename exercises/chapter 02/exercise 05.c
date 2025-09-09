@@ -2,8 +2,7 @@
 
 
 void ch02_ex05(void) {
-    int toes;
+    const int toes = 10;
 
-    toes = 10;
     printf("Toes: %d\nToes twice: %d\nToes squared: %d\n", toes, toes * 2, toes * toes);
 }

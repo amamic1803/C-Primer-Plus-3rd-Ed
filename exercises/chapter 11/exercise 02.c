@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <ctype.h>
+#include <stdio.h>
 #define MAX_LEN 80
 static void fetch_input(char *input, int max_len);
 

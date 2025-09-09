@@ -28,8 +28,9 @@ void ch14_ex04(void) {
     print_array_of_structs(soc_sec_array, ARRAY_SIZE);
     putchar('\n');
     printf("Printing struct by struct:\n");
-    for (i = 0; i < ARRAY_SIZE; i++)
+    for (i = 0; i < ARRAY_SIZE; i++) {
         print_struct(soc_sec_array[i]);
+    }
 }
 
 static void print_array_of_structs(const struct soc_sec_info *array, int size) {
