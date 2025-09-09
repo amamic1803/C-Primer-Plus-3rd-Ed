@@ -6,7 +6,7 @@
 static int load_strings(char **strings, int n);
 static void print_strings(char **strings, int entered);
 static void gets_custom(char *str, int size);
-static int get_first_word_len(char *string);
+static int get_first_word_len(const char *string);
 static void sort_by_ascii(char **strings, int entered);
 static void sort_by_length(char **strings, int entered);
 static void sort_by_first_word_length(char **strings, int entered);
@@ -123,7 +123,7 @@ static void gets_custom(char *str, int size) {
     str[i] = '\0';
 }
 
-static int get_first_word_len(char *string) {
+static int get_first_word_len(const char *string) {
     char word[MAX_STR_LEN + 1];
     int i = 0;
     int count = 0;

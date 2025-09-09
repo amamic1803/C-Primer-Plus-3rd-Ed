@@ -15,10 +15,10 @@ void ch10_ex11(void) {
     double largest_all_val;
 
     store_data(data, ROWS);
-    average_sets(data, average_sets_val, ROWS);
-    average_all_val = average_all(data, ROWS);
-    largest_all_val = largest_all(data, ROWS);
-    report_results(data, ROWS, average_sets_val, average_all_val, largest_all_val);
+    average_sets((const double (*)[COLS])data, average_sets_val, ROWS);
+    average_all_val = average_all((const double (*)[COLS])data, ROWS);
+    largest_all_val = largest_all((const double (*)[COLS])data, ROWS);
+    report_results((const double (*)[COLS])data, ROWS, average_sets_val, average_all_val, largest_all_val);
 }
 
 static void store_data(double (*ptr)[COLS], int rows) {

@@ -21,7 +21,7 @@ void ch15_ex02(int argc, char *argv[]) {
     }
 
     if (strlen(argv[1]) > (sizeof(int) * 8) || strlen(argv[2]) > (sizeof(unsigned short int) * 8)) {
-        printf("Both arguments must be %llu bits long or less.\n", sizeof(unsigned short int) * 8);
+        printf("Both arguments must be %llu bits long or less.\n", ((unsigned long long) sizeof(unsigned short int)) * 8);
         exit(EXIT_FAILURE);
     }
 
@@ -90,7 +90,7 @@ static void print_binary(unsigned short int n) {
     }
 
     for (power--; power > 0; power--) {
-        printf("%u", (unsigned short int) (n >> power) & 1U);  // NOLINT(clang-analyzer-core.BitwiseShift)
+        printf("%u", (unsigned short int) (n >> power) & 1U);  // NOLINT(clang-analyzer-core.BitwiseShift, clang-analyzer-core.UndefinedBinaryOperatorResult)
     }
     printf("%u", n & 1U);
 }

@@ -66,7 +66,7 @@ static void parse_lines(struct player *players, FILE *fp) {
 
     while (fgets(line, MAX_LINE, fp) != NULL) {
         token = strtok(line, " ");
-        i = strtol(token, NULL, 10);
+        i = (int) strtol(token, NULL, 10);
 
         token = strtok(NULL, " ");
         strcpy(players[i].first_name, token);
@@ -75,16 +75,16 @@ static void parse_lines(struct player *players, FILE *fp) {
         strcpy(players[i].last_name, token);
 
         token = strtok(NULL, " ");
-        players[i].at_bats += strtol(token, NULL, 10);
+        players[i].at_bats += (int) strtol(token, NULL, 10);
 
         token = strtok(NULL, " ");
-        players[i].hits += strtol(token, NULL, 10);
+        players[i].hits += (int) strtol(token, NULL, 10);
 
         token = strtok(NULL, " ");
-        players[i].walks += strtol(token, NULL, 10);
+        players[i].walks += (int) strtol(token, NULL, 10);
 
         token = strtok(NULL, " ");
-        players[i].RBI += strtol(token, NULL, 10);
+        players[i].RBI += (int) strtol(token, NULL, 10);
     }
 }
 

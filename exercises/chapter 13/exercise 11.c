@@ -50,7 +50,7 @@ static long double extract_average(const char *word) {
     int num_flag = 0;
     int read_nums = 0;
     int sum = 0;
-    int curr_num;
+    int curr_num = 0;
     int i = 0;
 
     while (word[i++] != ':') {}

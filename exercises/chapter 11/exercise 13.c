@@ -13,7 +13,7 @@ void ch11_ex13(int argc, char **argv) {
     }
 
     number = strtod(argv[1], NULL);
-    exponent = strtol(argv[2], NULL, 10);
+    exponent = (int) strtol(argv[2], NULL, 10);
     printf("%g ^ %d = %g\n", number, exponent, power(number, exponent));
 }
 

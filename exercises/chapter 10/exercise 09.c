@@ -12,10 +12,10 @@ void ch10_ex09(void) {
         {9.8, 8.7, 7.6, 6.5, 5.4}
     };
     printf("Original array:\n");
-    display_array(array, ROWS);
+    display_array((const double (*)[COLS])array, ROWS);
     mul2_array(array, ROWS);
     printf("\nMultiplied by 2:\n");
-    display_array(array, ROWS);
+    display_array((const double (*)[COLS])array, ROWS);
 }
 
 static void display_array(const double ar[][COLS], int rows) {

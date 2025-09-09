@@ -74,8 +74,8 @@ void ch17_ex04(void) {
         printf("customers accepted: %ld\n", customers);
         printf("  customers served: %ld\n", served);
         printf("         turnaways: %ld\n", turnaways);
-        printf("average queue size: %.2f\n", (double) sum_line / cyclelimit);
-        printf(" average wait time: %.2f minutes\n", (double) line_wait / served);
+        printf("average queue size: %.2f\n", ((double) sum_line) / ((double)cyclelimit));
+        printf(" average wait time: %.2f minutes\n", ((double) line_wait) / ((double)served));
     } else {
         puts("No customers!");
     }
