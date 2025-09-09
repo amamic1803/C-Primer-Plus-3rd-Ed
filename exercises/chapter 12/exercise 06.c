@@ -28,6 +28,7 @@ void ch12_ex06(int argc, char **argv) {
         for (i = 2; i < argc; i++) {
             if ((fp = fopen(argv[i], "r")) == NULL) {
                 printf("Can't open %s\n", argv[i]);
+                continue;
             }
             count = 0;
             while ((ch = (char) getc(fp)) != EOF) {
